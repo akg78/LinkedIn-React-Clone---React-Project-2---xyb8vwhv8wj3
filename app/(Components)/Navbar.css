@@ -1,0 +1,23 @@
+
+.MuiContainer-root{
+    /* height: 52.8px; */
+    /* background-color: black; */
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+.boxxx{
+    box-shadow: none;
+}
+
+.MuiBox-root{
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+/* .css-130mzha-MuiToolbar-root{
+    
+} */
+
