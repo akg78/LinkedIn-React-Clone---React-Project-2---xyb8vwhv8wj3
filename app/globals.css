@@ -5,8 +5,9 @@
 
 
 body{
-    background-color: #f8f4ece6;
+    background-color: #f4f2ee;
 }
+
 .flex {
   display: flex;
 }
@@ -49,6 +50,9 @@ body{
 
 .g20 {
   gap: 20px;
+}
+.g30{
+  gap: 30px;
 }
 
 .b1 {
@@ -133,6 +137,9 @@ body{
 
 .mr30 {
   margin-right: 30px;
+}
+.mr40{
+  margin-right: 40px;
 }
 
 .p5 {
@@ -389,4 +396,7 @@ body{
 
 .brdrllgray {
   border-color: rgba(211, 211, 211, 0.184) !important;
+}
+.cp{
+  cursor: pointer;
 }

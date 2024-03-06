@@ -1,23 +1,51 @@
-
-.MuiContainer-root{
-    /* height: 52.8px; */
-    /* background-color: black; */
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-}
-.boxxx{
-    box-shadow: none;
+.MuiContainer-root {
+  height: 52.8px;
+  /* background-color: black; */
+  background-color: white;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  border: none;
 }
 
-.MuiBox-root{
-    justify-content: space-between;
-    font-family: Arial, Helvetica, sans-serif;
-    
+.MuiBox-root {
+  justify-content: space-between;
+  font-family: Arial, Helvetica, sans-serif;
 }
-/* .css-130mzha-MuiToolbar-root{
-    
-} */
+.darkmode {
+  position: relative;
+  top: 3px;
+  text-wrap: nowrap;
+  height: 6px;
+  width: 12;
+  border-radius: 30px;
+  flex-shrink: 0;
+  color: #262626;
+}
+.moon {
+  position: absolute;
+  top: 6px;
+  left: 10px;
+  color: white;
+  
+}
+.sun {
+    position: absolute;
+  top: 6px;
+    right: 10px;
+    color: yellow;
+  }
 
+  .userImgNav{
+    width: 40px;
+    height: 40px;
+    background-color: black;
+    border-radius: 50px;
+  }
+  
+  .navuserwrap{
+    position: absolute;
+    top: 0;
+    left: 10px;
+  }

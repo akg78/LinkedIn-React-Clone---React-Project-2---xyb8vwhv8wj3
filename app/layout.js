@@ -8,9 +8,16 @@ import { createContext, useEffect, useState } from 'react'
 
 
 
+
 export const context=createContext();
 export default function RootLayout({ children }) {
+  const [ showNavbar, setShowNavbar] =  useState(true);
   const [show ,setshow]=useState(false);
+  const [toggle, setToggle] = useState(false)
+  const [popEdit, setPopEdit] =  useState(false);
+  // const [loginId, setLoginId] = useState("");
+
+
   useEffect(()=>{
 if(localStorage.getItem("token")){
     setshow(true);
@@ -19,8 +26,8 @@ if(localStorage.getItem("token")){
   return (
     <html lang="en">
       <body >
-        <context.Provider value={{show,setshow}}>
-       <Navbar />
+        <context.Provider value={{show,setshow,setShowNavbar, showNavbar, toggle, setToggle, popEdit, setPopEdit}}>
+       {showNavbar && <Navbar />}
         {children}
         </context.Provider>
       </body>

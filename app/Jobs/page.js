@@ -1,5 +1,5 @@
 import React from 'react'
-import "./Jobs";
+import "./page";
 
 function Jobs() {
   return (

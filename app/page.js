@@ -8,6 +8,8 @@ export default function Home() {
   useEffect(() => {
     if (typeof (localStorage.getItem("token")) != "string") {
       router.push("/login");
+    }else{
+      router.push("/Home");
     }
 
   }, [])
