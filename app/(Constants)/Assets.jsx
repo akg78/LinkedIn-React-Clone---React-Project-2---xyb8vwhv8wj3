@@ -159,5 +159,20 @@ export const navPages = [
 export const profileImg =
   "https://assets-global.website-files.com/639ff8596ae419fae300b099/641017314cc67fbb88c517a7_good-linkedin-profile-photo-right-expression-1000x1000.jpeg";
 
+// export const loginImg = "";
 
-  export const loginImg = "";
+export const sideBarImg =
+  "https://static.wixstatic.com/media/2a98c6_71c5e30787cb4993a3df015c53532c8d~mv2.png/v1/fill/w_420,h_350,al_c,lg_1,q_85,enc_auto/2a98c6_71c5e30787cb4993a3df015c53532c8d~mv2.png";
+
+export const groupDp = (
+  <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+);
+
+export const premiumImg1 =
+  "https://i.pinimg.com/564x/0d/f3/98/0df398b12245098f7ed720df241f7277.jpg";
+export const premiumImg2 =
+  "https://i.pinimg.com/564x/bc/25/b9/bc25b9b6bf9bbb950713d4d5c1302ebb.jpg";
+export const premiumImg3 =
+  "https://i.pinimg.com/564x/2e/4b/a3/2e4ba36293c7f5e4a60ec9dd194f5de5.jpg";
+export const premiumImg4 =
+  "https://i.pinimg.com/564x/b3/5c/b7/b35cb705bac62505a0ebcedc435a45c8.jpg";

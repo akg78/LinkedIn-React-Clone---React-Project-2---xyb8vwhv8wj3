@@ -13,7 +13,7 @@
   justify-content: space-between;
   font-family: Arial, Helvetica, sans-serif;
 }
-.darkmode {
+/* .darkmode {
   position: relative;
   top: 3px;
   text-wrap: nowrap;
@@ -22,20 +22,20 @@
   border-radius: 30px;
   flex-shrink: 0;
   color: #262626;
-}
-.moon {
+} */
+/* .moon {
   position: absolute;
   top: 6px;
   left: 10px;
   color: white;
   
-}
-.sun {
+} */
+/* .sun {
     position: absolute;
   top: 6px;
     right: 10px;
     color: yellow;
-  }
+  } */
 
   .userImgNav{
     width: 40px;

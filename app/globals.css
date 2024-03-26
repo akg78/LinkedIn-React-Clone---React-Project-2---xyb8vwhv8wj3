@@ -400,3 +400,22 @@ body{
 .cp{
   cursor: pointer;
 }
+
+
+.dark-theme{
+  background-color: #111b20;
+  color: #fff;
+}
+
+.light-theme{
+  background-color: #fff;
+
+}
+
+.active{
+  color: #1471ff;
+}
+
+.inactive{
+  color: #7a7a7a;
+}

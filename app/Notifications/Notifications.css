@@ -2,3 +2,11 @@
     padding: 0;
     margin: 0;
 }
+
+.mainContainerNotification{
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    justify-content: center;
+    background-color: #f4f2ee;
+}

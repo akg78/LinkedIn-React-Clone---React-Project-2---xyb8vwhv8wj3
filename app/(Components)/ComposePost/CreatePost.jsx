@@ -4,6 +4,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import ImageIcon from "@mui/icons-material/Image";
 import { context } from "@/app/layout";
 import { ToastContainer, toast } from "react-toastify";
+import { styled } from "@mui/material/styles";
+import Button from "@mui/material/Button";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 export default function CreatePost({
   setpop,
@@ -35,16 +38,28 @@ export default function CreatePost({
         }
       );
       const result = await response.json();
-      console.log(result);
+      // console.log(result);
       setToggle(!toggle);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
   // const postToast = ()=>{
   //   toast("Post Successfull");
   // }
+
+  const VisuallyHiddenInput = styled("input")({
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
+    height: 1,
+    overflow: "hidden",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    whiteSpace: "nowrap",
+    width: 1,
+  });
 
   return (
     <div>
@@ -97,14 +112,21 @@ export default function CreatePost({
         </div>
         <hr className="hrCreatePost" />
         <div className="popPost flex flexja flexjsb p20 cp">
-          <div className="fnt12 g5 flex flexa addImg">
-            <ImageIcon className="mediaIcon" />
-            <input
-              type="file"
+          <div>
+            <Button
               onChange={(e) => {
                 setPostImg(e.target.files[0]);
               }}
-            />
+              sx={{ scale: "0.5", mr: "100px", backgroundColor: "lightgray" }}
+              component="label"
+              role={undefined}
+              variant="contained"
+              tabIndex={-1}
+              startIcon={<CloudUploadIcon />}
+            >
+              Upload file
+              <VisuallyHiddenInput type="file" />
+            </Button>
           </div>
           <button
             style={{}}

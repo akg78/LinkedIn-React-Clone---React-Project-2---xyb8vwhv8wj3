@@ -3,7 +3,7 @@ import "./MyNetwork.css";
 
 function MyNetwork() {
   return (
-    <div>MyNetwork</div>
+    <div className='mainContainerMynetwork'>MyNetwork</div>
   )
 }
 

@@ -1,8 +1,9 @@
 import React from 'react'
+import "./Notifications.css"
 
 function page() {
   return (
-    <div>page</div>
+    <div className='mainContainerNotification'>page</div>
   )
 }
 

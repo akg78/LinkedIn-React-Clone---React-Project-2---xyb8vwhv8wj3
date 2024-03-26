@@ -3,7 +3,7 @@ import "./Messages.css";
 
 function Messages() {
   return (
-    <div>Messages</div>
+    <div className='mainContainerMessage'>Messages</div>
   )
 }
 

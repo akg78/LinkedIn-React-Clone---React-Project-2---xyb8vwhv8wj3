@@ -1,9 +1,9 @@
 import React from 'react'
-import "./page";
+import "./Jobs.css";
 
 function Jobs() {
   return (
-    <div>Jobs</div>
+    <div className='mainContainerJobs'>Jobs</div>
   )
 }
 
