@@ -18,8 +18,24 @@
 }
 
 .groupList {
-  width: 50%;
+  width: 97.4%;
+  height: 610px;
+  overflow-y: scroll;
+  
 }
+.groupList::-webkit-scrollbar{
+  display: none;
+}
+
 .groupList ul{
   list-style-type: none;
+}
+.groupList li{
+  height: 60px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.181);
+  
+}
+
+.groupList li:hover{
+  background-color: #eae5e5;
 }

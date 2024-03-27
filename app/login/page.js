@@ -21,11 +21,11 @@ const defaultTheme = createTheme();
 
 const Login = () => {
   const router = useRouter();
-  const { show, setshow, setShowNavbar, showNavbar} = useContext(context);
-  
-  useEffect(()=>{
+  const { show, setshow, setShowNavbar, showNavbar } = useContext(context);
+
+  useEffect(() => {
     setShowNavbar(false)
-  },[])
+  }, [])
 
   const [signInShow, setSignInShow] = useState(true);
   const [name, setName] = useState("");
@@ -33,7 +33,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  // const [alertError, setAlertError] = useState(false);
 
 
   // -------------------------fetch API signup --------------------------------
@@ -57,12 +56,19 @@ const Login = () => {
           }),
         }
       );
-      // if(!response.ok){
-      //   // alert("please signup");
-      //   return;
-      // }
       const data = await response.json();
-      console.log("newdata", data);
+      console.log("Signup", data);
+      if (data.status === "success") {
+        const token = data.token;
+        localStorage.setItem('name', JSON.stringify(data.data.user.name));
+        localStorage.setItem('token', JSON.stringify(token));
+        router.push('/login')
+      } else if (data.message === ('user already exists')) {
+        alert('user already exists')
+      } else if (name === "" || email === "" || password === "") {
+        alert("please fill all the details!")
+      }
+
     } catch (error) {
       alert(error);
     }
@@ -89,15 +95,17 @@ const Login = () => {
       );
 
       const newData = await res.json();
-      // console.log("newData", newData);
+      console.log("Login", newData);
       if (newData.status === "success") {
         const token = newData.token;
         localStorage.setItem("token", token);
         localStorage.setItem("id", newData.data._id);
+        localStorage.setItem('name', JSON.stringify(newData.data.name));
+        setshow(true);
+        router.push('/');
+      } else if (name === "" || email === "" || password === "") {
+        alert("Login or Password incorrect!")
       }
-      setshow(true);
-      router.push('/');
-      // alert("Login or Password incorrect!")
     } catch (error) {
       alert(error);
     }
@@ -135,8 +143,8 @@ const Login = () => {
       <div className='flex wrapNavLogin flexa'>
         <p className='fullogo'>{fullLogo}</p>
         <div className='flex wrapLoginButton flexa'>
-          <p className='cp' onClick={()=>{setSignInShow(false)}}>Join now</p>
-          <button onClick={()=>{setSignInShow(true)}}>Sign in</button>
+          <p className='cp' onClick={() => { setSignInShow(false) }}>Join now</p>
+          <button onClick={() => { setSignInShow(true) }}>Sign in</button>
         </div>
       </div>
       <div className='mainSvglogin flex'>

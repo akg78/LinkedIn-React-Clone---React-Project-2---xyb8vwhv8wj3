@@ -80,7 +80,7 @@ function Navbar() {
   const { show, setshow } = useContext(context);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState();
 
   // const [loginShow, setLoginShow] = useState(false);
 
@@ -140,6 +140,8 @@ function Navbar() {
   const handleSignOut = () => {
     setToken("");
     localStorage.removeItem("token");
+    localStorage.removeItem("name");
+    localStorage.removeItem("id");
   };
 
 
@@ -149,10 +151,9 @@ function Navbar() {
     setTheme(theme === "light-theme" ? "dark-theme" : "light-theme");
   }
 
-  // useEffect(()=>{
-  //   document.body.className = theme;
-
-  // }, [theme])
+  useEffect(()=>{
+    setToken(localStorage.getItem("token"))
+  },[])
 
 
   return (
@@ -286,7 +287,7 @@ function Navbar() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Me">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/broken-image.jpg" />
+                  <Avatar>{localStorage.getItem("name") ? `${JSON.parse(localStorage.getItem('name')).slice(0,1).toUpperCase()}` : ""}</Avatar>
                 </IconButton>
               </Tooltip>
 

@@ -51,11 +51,10 @@
   position: relative;
   justify-content: space-between;
   margin-top: 110px;
-
 }
 
-.loginHr{
-    height: 0.5px;
-    background-color: rgba(128, 128, 128, 0.329);
-    width: 33%;
+.loginHr {
+  height: 0.5px;
+  background-color: rgba(128, 128, 128, 0.329);
+  width: 33%;
 }
