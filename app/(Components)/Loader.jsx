@@ -1,3 +1,4 @@
+"use client";
 import { LinearProgress } from "@mui/material";
 import React from "react";
 

@@ -62,10 +62,11 @@ const Login = () => {
         const token = data.token;
         localStorage.setItem('name', JSON.stringify(data.data.user.name));
         localStorage.setItem('token', JSON.stringify(token));
-        router.push('/login')
-      } else if (data.message === ('user already exists')) {
+        localStorage.setItem("id", data.data.user._id);
+        router.push('/')
+      } else if (data.message === 'User already exists') {
         alert('user already exists')
-      } else if (name === "" || email === "" || password === "") {
+      } else if (data.message === "Invalid input data. A user must have a name. A user must have an email") {
         alert("please fill all the details!")
       }
 

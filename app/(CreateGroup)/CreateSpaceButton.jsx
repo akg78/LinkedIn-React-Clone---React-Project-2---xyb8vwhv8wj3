@@ -11,13 +11,12 @@ import { Box, MenuItem } from "@mui/material";
 import { styled } from "@mui/joy";
 import { Edit } from "@mui/icons-material";
 
-export default function CreateSpaceButton() {
+export default function CreateSpaceButton(getChannel) {
   const [open, setOpen] = useState(false);
-  // const [group, setGroup] = useState("");
-  // const [channelName, setChannelName] = useState("");
+  const [group, setGroup] = useState("");
+  const [channelName, setChannelName] = useState("");
   const [channelDescription, setChannelDescription] = useState("");
   // const [channelImage, setChannelImage] = useState("");
-  
 
   const VisuallyHiddenInput = styled("input")`
     clip: rect(0 0 0 0);
@@ -31,31 +30,31 @@ export default function CreateSpaceButton() {
     width: 1px;
   `;
 
-  // const createGroup = async () => {
-  //   try {
-  //     let formData = new FormData();
-  //     formData.append("name", channelName);
-  //     formData.append("description", channelDescription);
-  //     formData.append("image", channelImage);
-  //     const response = await fetch(
-  //       "https://academics.newtonschool.co/api/v1/linkedin/channel/",
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           ProjectID: "i1dieevrt9g1",
-  //           Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //         },
-  //         body: formData,
-  //       }
-  //     );
-  //     const result = await response.json();
-  //     console.log("chanelllllllllllllll", result);
-  //     setGroup();
-  //   } catch (error) {
-  //     // console.log(error);
-  //   }
-  // };
-
+  const createGroup = async () => {
+    let formData = new FormData();
+    formData.append("name", channelName);
+    formData.append("description", channelDescription);
+    // formData.append("image", channelImage);
+    try {
+      const response = await fetch(
+        "https://academics.newtonschool.co/api/v1/linkedin/channel/",
+        {
+          method: "POST",
+          headers: {
+            ProjectID: "i1dieevrt9g1",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: formData,
+        }
+      );
+      const result = await response.json();
+      console.log("chanelllllllllllllll", result);
+      setGroup();
+      getChannel();
+    } catch (error) {
+      console.log(error, "error");
+    }
+  };
 
   return (
     <div className="mainGroupContainer">
@@ -126,6 +125,7 @@ export default function CreateSpaceButton() {
                 <Button
                   onClick={() => {
                     createGroup();
+                    setOpen(false)
                   }}
                 >
                   Post
@@ -134,7 +134,12 @@ export default function CreateSpaceButton() {
             </div>
             <div className="flex flexc groupName">
               <label>Group Name*</label>
-              <input type="text" placeholder="ENTER YOUR GROUP NAME" />
+              <input
+                type="text"
+                placeholder="ENTER YOUR GROUP NAME"
+                value={channelName}
+                onChange={(e) => setChannelName(e.target.value)}
+              />
             </div>
             <div className="flex flexc description">
               <label>Description*</label>
@@ -148,6 +153,7 @@ export default function CreateSpaceButton() {
                 id="text"
                 placeholder="What do you want to talk about?"
                 value={channelDescription}
+                onChange={(e) => setChannelDescription(e.target.value)}
               />
             </div>
           </Box>

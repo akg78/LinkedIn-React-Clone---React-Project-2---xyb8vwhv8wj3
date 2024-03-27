@@ -54,7 +54,7 @@ export default function page() {
       >
         <div className="headerGroup flex flexjsb flexa">
           <span>Your groups</span>
-          <span>{<CreateSpaceButton />}</span>
+          <span>{<CreateSpaceButton getChannel={getChannel} />}</span>
         </div>
         <div className="groupList p20 g10">
           <ul>

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, useEffect, useContext, useMemo } from 'react'
 import "./Home.css"
 import CssBaseline from '@mui/material/CssBaseline';
@@ -18,7 +18,6 @@ import CreateSpaceButton from '../(CreateGroup)/CreateSpaceButton';
 import Loader from '../(Components)/Loader';
 import { articleIcon, eventIcon, mediaIcon, sideBarImg } from '../(Constants)/Assets';
 // import index from 'toastify';
-import Sidebar from './Sidebar';
 import { Article } from '@mui/icons-material';
 
 

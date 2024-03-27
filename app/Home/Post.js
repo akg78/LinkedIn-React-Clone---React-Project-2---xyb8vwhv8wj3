@@ -1,4 +1,4 @@
-
+"use client";
 import React, { useState, useEffect } from 'react'
 import { BiWorld } from "react-icons/bi";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
