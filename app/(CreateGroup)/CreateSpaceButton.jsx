@@ -48,11 +48,11 @@ export default function CreateSpaceButton(getChannel) {
         }
       );
       const result = await response.json();
-      console.log("chanelllllllllllllll", result);
+      // console.log("chanelllllllllllllll", result);
       setGroup();
       getChannel();
     } catch (error) {
-      console.log(error, "error");
+      // console.log(error, "error");
     }
   };
 

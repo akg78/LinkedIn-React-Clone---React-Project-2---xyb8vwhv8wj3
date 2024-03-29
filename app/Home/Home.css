@@ -22,8 +22,9 @@
   border-bottom: 1px solid rgba(128, 128, 128, 0.181);
 }
 .sidebarDetails .username {
-  margin-top: 60px;
+  margin-top: 50px;
 }
+
 .sidebarDetails p {
   margin-top: 15px;
   font-size: 11.5px;
@@ -32,17 +33,14 @@
 }
 .userCoverImg {
   position: relative;
-  background-color: #378fe9;
+  /* background-color: #378fe9; */
   height: 23%;
   width: 100%;
 }
 .userProfilePic {
   position: absolute;
   top: 45px;
-  background-color: black;
-  height: 70px;
-  width: 70px;
-  border-radius: 50px;
+  margin-right: 15px;
 }
 
 /* end of HomeContainer CSS */
@@ -121,17 +119,7 @@
   height: 65px;
   justify-content: space-evenly;
 }
-.composeImg {
-  height: 55px;
-  width: 55px;
-  border-radius: 50%;
-  border: 1px solid rgba(128, 128, 128, 0.393);
-}
-/* .composeImg img{
-    height: 55px;
-    width: 55px;
-    border-radius: 50%;
-} */
+
 .composeSearch {
   height: 45px;
   width: 85%;
@@ -161,12 +149,7 @@
   background-color: #fff;
   border-radius: 8px;
 }
-.imgPop {
-  height: 55px;
-  width: 55px;
-  border-radius: 50%;
-  background-color: #378fe9;
-}
+
 .popCompose {
   height: 400px;
   box-sizing: border-box;
@@ -259,12 +242,6 @@
 }
 .wrapSelfcomments {
   padding: 5px;
-}
-.wrapSelfcommentsImg {
-  height: 36px;
-  width: 40px;
-  border-radius: 20px;
-  border: 1px solid rgba(128, 128, 128, 0.477);
 }
 
 .wrapSelfcomments input {

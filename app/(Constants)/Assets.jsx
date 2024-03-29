@@ -4,7 +4,7 @@ export const logo = (
     viewBox="0 0 24 24"
     data-supported-dps="24x24"
     fill="#0a66c2"
-    class="mercado-match"
+    className="mercado-match"
     width="24"
     height="24"
     focusable="false"
@@ -35,7 +35,7 @@ export const dropDownIcon = (
   <svg
     role="none"
     aria-hidden="true"
-    class="global-nav__icon global-nav__icon--small"
+    className="global-nav__icon global-nav__icon--small"
     xmlns="http://www.w3.org/2000/svg"
     width="16"
     height="16"
@@ -56,7 +56,7 @@ export const navPages = [
         viewBox="0 0 24 24"
         data-supported-dps="24x24"
         fill="currentColor"
-        class="mercado-match"
+        className="mercado-match"
         width="24"
         height="24"
         focusable="false"
@@ -76,7 +76,7 @@ export const navPages = [
         viewBox="0 0 24 24"
         data-supported-dps="24x24"
         fill="currentColor"
-        class="mercado-match"
+        className="mercado-match"
         width="24"
         height="24"
         focusable="false"
@@ -96,7 +96,7 @@ export const navPages = [
         viewBox="0 0 24 24"
         data-supported-dps="24x24"
         fill="currentColor"
-        class="mercado-match"
+        className="mercado-match"
         width="24"
         height="24"
         focusable="false"
@@ -116,7 +116,7 @@ export const navPages = [
         viewBox="0 0 24 24"
         data-supported-dps="24x24"
         fill="currentColor"
-        class="mercado-match"
+        className="mercado-match"
         width="24"
         height="24"
         focusable="false"
@@ -136,7 +136,7 @@ export const navPages = [
         viewBox="0 0 24 24"
         data-supported-dps="24x24"
         fill="currentColor"
-        class="mercado-match"
+        className="mercado-match"
         width="24"
         height="24"
         focusable="false"
@@ -176,3 +176,19 @@ export const premiumImg3 =
   "https://i.pinimg.com/564x/2e/4b/a3/2e4ba36293c7f5e4a60ec9dd194f5de5.jpg";
 export const premiumImg4 =
   "https://i.pinimg.com/564x/b3/5c/b7/b35cb705bac62505a0ebcedc435a45c8.jpg";
+
+
+
+  export const userCoverPic = <svg style={{borderRadius: "5px 5px 0px 0px", marginLeft: "0.01px"}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 138" id="person-default" data-supported-dps="2048x512">
+  <path fill="none" d="M0 0h552v138H0z"/>
+  <path fill="#d9e5e7" d="M0 0h552v138H0z"/>
+  <path fill="#bfd3d6" d="M380 0h172v138H380z"/>
+  <path d="M333.22 0H0v138h333.22a207.93 207.93 0 000-138z" fill="#a0b4b7"/>
+</svg>
+
+export const userCoverPicHome = <svg style={{borderRadius: "8px 8px 0px 0px"}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 138" id="person-default" data-supported-dps="2048x512">
+<path fill="none" d="M0 0h552v138H0z"/>
+<path fill="#d9e5e7" d="M0 0h552v138H0z"/>
+<path fill="#bfd3d6" d="M380 0h172v138H380z"/>
+<path d="M333.22 0H0v138h333.22a207.93 207.93 0 000-138z" fill="#a0b4b7"/>
+</svg>

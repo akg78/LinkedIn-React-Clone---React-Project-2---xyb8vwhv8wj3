@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { BiWorld } from "react-icons/bi";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { FaRegCommentDots } from "react-icons/fa";
@@ -16,8 +16,11 @@ import MenuButton from '@mui/joy/MenuButton';
 import Dropdown from '@mui/joy/Dropdown';
 import { profileImg } from '../(Constants)/Assets';
 import Comments from './Comments';
+import { context } from '../layout';
+import { Avatar } from '@mui/material';
 
-export default function Post({ item, deletePost, setpop, popEdit, setPopEdit, modifyTitle, setModifyTitle, modifyContent, setModifyContent, modifyPostID, setModifyPostID }) {
+
+export default function Post({ item, index, deletePost, setpop, popEdit, setPopEdit, modifyTitle, setModifyTitle, modifyContent, setModifyContent, modifyPostID, setModifyPostID }) {
 
     const [commentPop, setCommentPop] = useState(false);
     const [comData, setComData] = useState();
@@ -25,10 +28,13 @@ export default function Post({ item, deletePost, setpop, popEdit, setPopEdit, mo
     const [commentInput, setCommentInput] = useState(" ");
     const [commpost, setCommpost] = useState(" ");
     const [activeLike, setActiveLike] = useState(false);
+    const { toggle, setToggle } = useContext(context);
+    const [dislike, setDislike] = useState()
 
-    function toggleActive(){
+
+    function toggleActive() {
         setActiveLike(!activeLike);
-        setLike(like +1)
+        // setLike(like)
     }
 
 
@@ -40,7 +46,22 @@ export default function Post({ item, deletePost, setpop, popEdit, setPopEdit, mo
     }
 
 
+    // function likeCheck(){
+
+    // }
+
     // const showComments = (`${"feedPost", item._id}`);
+
+    // useEffect(()=>{
+    //     likePost()
+    // }, [])
+
+    const [localStorageValue, setLocalStorageValue] = useState();
+
+    useEffect(()=>{
+        const value = localStorage.getItem("name")
+        setLocalStorageValue(value)
+    }, [])
 
 
     const commentFetch = async (id) => {
@@ -86,7 +107,7 @@ export default function Post({ item, deletePost, setpop, popEdit, setPopEdit, mo
             setCommpost();
 
         } catch (error) {
-            console.log("error", error);
+            // console.log("error", error);
         }
     }
 
@@ -94,7 +115,7 @@ export default function Post({ item, deletePost, setpop, popEdit, setPopEdit, mo
 
     const likePost = async (id) => {
         try {
-            const response = await fetch(`https://academics.newtonschool.co/api/v1/linkedin/like/post/${id}`,
+            const response = await fetch(`https://academics.newtonschool.co/api/v1/linkedin/like/${id}`,
                 {
                     method: "POST",
                     headers: {
@@ -104,8 +125,31 @@ export default function Post({ item, deletePost, setpop, popEdit, setPopEdit, mo
                 }
             );
             const re = await response.json();
-            // console.log("likeeeee", re.data)
-            setLike(re.data)
+            // console.log("likeeeee", re)
+            setToggle(!toggle);
+            setLike(re)
+
+
+        } catch (error) {
+            // console.log(error, "error")
+        }
+    }
+
+    const dislikePost = async (id) => {
+        try {
+            const response = await fetch(`https://academics.newtonschool.co/api/v1/linkedin/like/${id}`,
+                {
+                    method: "DELETE",
+                    headers: {
+                        ProjectID: "i1dieevrt9g1",
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                }
+            );
+            const res = await response.json();
+            // console.log("kkkkk", res)
+            setToggle(!toggle);
+            setDislike(res)
 
         } catch (error) {
             // console.log(error, "error")
@@ -113,7 +157,7 @@ export default function Post({ item, deletePost, setpop, popEdit, setPopEdit, mo
     }
 
     return (
-        <div className="feedPost mt10 ">
+        <div key={index} className="feedPost mt10 ">
             <div className='flex dotdelete'>
                 <Dropdown>
                     <MenuButton
@@ -163,7 +207,8 @@ export default function Post({ item, deletePost, setpop, popEdit, setPopEdit, mo
                 </div>
                 <hr className='hrPostt' />
                 <div className='dis-btn flex p5'>
-                    <div className='flex g5 p20 ' onClick={() => { likePost(), toggleActive() }}><p><ThumbUpIcon className={activeLike ? 'active' : 'inactive'} /></p>Like</div>
+                    {<div className='flex g5 p20 ' onClick={() => { likePost(item._id), toggleActive() }}><p><ThumbUpIcon className={activeLike ? 'active' : 'inactive'} /></p>Like</div>}
+                    {/* {like.status === "success" && <div className='flex g5 p20 ' onClick={()=>{deslikePost(item._id)}}><p><ThumbUpIcon className={activeLike ? 'inactive' : 'active'} /></p>dislike</div>} */}
                     <div className='flex g5 p20' onClick={() => { setCommentPop(!commentPop); commentFetch(item._id) }}><p><FaRegCommentDots /></p>Comments</div>
                     {/* <div className='flex g5 p20'><p><FaShare /></p>Share</div> */}
                 </div>
@@ -171,7 +216,8 @@ export default function Post({ item, deletePost, setpop, popEdit, setPopEdit, mo
 
             {commentPop && <div className='commentPop'>
                 <div className='flex wrapSelfcomments g10 flexa'>
-                    <div className='wrapSelfcommentsImg'><img /></div>
+                    <div><Avatar>{localStorageValue ? `${JSON.parse(localStorageValue).slice(0,1).toUpperCase()}` : ""}</Avatar></div>
+
                     <input type='text' placeholder='Add a comments...' value={commentInput} onChange={(e) => { setCommentInput(e.target.value) }} onKeyUp={(e) => { commentFun(e, item._id) }} />
                 </div>
 

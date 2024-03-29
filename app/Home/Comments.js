@@ -111,10 +111,6 @@ export default function Comments({ item, itemm, index, comData, setComData, comm
                                 </MenuItem>
                             </Menu>
                         </Dropdown>
-
-                        {/* <button onClick={() => { deleteComment(itemm._id) }}>Delete</button> */}
-
-
                     </div>
                 </div>}
         </>

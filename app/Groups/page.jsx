@@ -24,9 +24,9 @@ export default function page() {
       );
       const result = await response.json();
       setGetGroup(result.data);
-      console.log("he", result.data);
+      // console.log("he", result.data);
     } catch (error) {
-      console.log(error, "error");
+      // console.log(error, "error");
     }
   };
 

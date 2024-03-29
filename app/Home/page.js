@@ -16,23 +16,24 @@ import 'react-toastify/dist/ReactToastify.css';
 import Link from 'next/link';
 import CreateSpaceButton from '../(CreateGroup)/CreateSpaceButton';
 import Loader from '../(Components)/Loader';
-import { articleIcon, eventIcon, mediaIcon, sideBarImg } from '../(Constants)/Assets';
+import { articleIcon, eventIcon, mediaIcon, sideBarImg, userCoverPic, userCoverPicHome } from '../(Constants)/Assets';
 // import index from 'toastify';
 import { Article } from '@mui/icons-material';
+import { Avatar } from '@mui/material';
 
 
 
 function page() {
 
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  // const [anchorEl, setAnchorEl] = useState(null);
+  // const open = Boolean(anchorEl);
+  // const handleClick = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
 
 
 
@@ -53,6 +54,8 @@ function page() {
   const [modifyPostID, setModifyPostID] = useState("");
   const [news, setNews] = useState([]);
   const NewsapiKey = "571d954539a24684b8e1e1ee4f23bb87";
+  const [localStorageValue, setLocalStorageValue] = useState();
+
 
 
 
@@ -65,9 +68,9 @@ function page() {
         const response = await fetch(url);
         const data = await response.json();
         setNews(data.articles);
-        console.log("jhhhhhh", data)
+        // console.log("jhhhhhh", data)
       } catch (error) {
-        console.log("error", error);
+        // console.log("error", error);
       }
     }
     newsFetch();
@@ -90,11 +93,10 @@ function page() {
         }
       )).json();
       setPost(response.data)
-      // console.log(response.data);
+      // console.log("posttttttttt", response.data);
       // setIsLoading(false);
-      // console.log(response.data);
     } catch (error) {
-      alert(error);
+      // console.log(error, "error")
       // setIsLoading(false);
     }
   }, [toggle]
@@ -149,7 +151,7 @@ function page() {
   // Convert milliseconds to days
   const daysSinceEpoch = millisecondsSinceEpoch / millisecondsInDay;
 
-  console.log(daysSinceEpoch);
+  // console.log(daysSinceEpoch);
 
   // console.log(numberOfWeeks);
 
@@ -162,17 +164,22 @@ function page() {
   // className={activenav["dis-btn"] ? "activecolor" : ""} onClick={() => { activenavmaker("dis-btn") }}>{!activenav["dis-btn"]? <img src='hotels.png' className='icons' /> : <img src='hotelblue.png' />}
 
 
-  function handleLike() {
-    if (liked) {
-      setLikeCount(likeCount + 1);
-    }
+  // function handleLike() {
+  //   if (liked) {
+  //     setLikeCount(likeCount + 1);
+  //   }
 
-  }
+  // }
 
   useEffect(() => {
     setShowNavbar(true)
   }, [])
 
+
+  useEffect(()=>{
+    const value = localStorage.getItem("name")
+    setLocalStorageValue(value)
+}, [])
 
   // const notify = () => toast.info("Under Construction!",{autoClose:3000})
 
@@ -186,8 +193,8 @@ function page() {
         <Box sx={{ mt: "25px", width: "1130px", display: "flex" }} >
           <div className='sidebarLeft'>
             <div className='flexc sidebarDetails flexa'>
-              <div className='userCoverImg'></div>
-              <div className='userProfilePic'></div>
+              <div className='userCoverImg'>{userCoverPicHome}</div>
+              <div className='userProfilePic'><Avatar sx={{ scale: "1.8", marginLeft: "15px", marginTop: "15px" }}>{localStorageValue ? `${JSON.parse(localStorageValue).slice(0, 1).toUpperCase()}` : ""}</Avatar></div>
               <Link className='username' href='MyProfile' style={{
                 textDecoration: "none",
                 color: "#000",
@@ -195,7 +202,9 @@ function page() {
                 fontWeight: "551",
                 fontFamily: "Arial, Helvetica, sans-serif",
                 fontSmooth: "always",
-              }}>User Name </Link>
+              }}>
+                {localStorageValue ? `${JSON.parse(localStorageValue).charAt(0).toUpperCase() + JSON.parse(localStorageValue).slice(1)}` : ""}
+              </Link>
 
               <p>HTML | CSS | JavaScript | React | Java | Web Developer with a Passion for Creating Beautiful Websites.</p>
             </div>
@@ -214,13 +223,13 @@ function page() {
           <div className='mainContainer'>
             <div className='createPost p5'>
               <div className='composePost flex flexa' onClick={() => { setpop(true) }}>
-                <div className='composeImg' ><img src='' /></div>
+                <div><Avatar>{localStorageValue ? `${JSON.parse(localStorageValue).slice(0, 1).toUpperCase()}` : ""}</Avatar></div>
                 <div className='composeSearch flexa p20 fnt14 '>Start a post</div>
               </div>
               <div className=' composePostFooter flex flexa'>
-                <div className='flexa g5 cp' onClick={() => { setpop(true) }}>{<ImageIcon style={{color: "rgb(112, 181, 249)", backgroundColor: "transparent"}}/>} <p>Media</p></div>
-                <div className='flexa g5 cp' onClick={() => { setpop(true) }}>{<EventNoteIcon style={{color: "rgb(231, 163, 62)", backgroundColor: "transparent"}}/>} <p>Event</p></div>
-                <div className='flexa g5 cp' onClick={() => { setpop(true) }}>{<Article style={{color: "rgb(245, 152, 126)", backgroundColor: "transparent"}}/>} <p>Write Article</p></div>
+                <div className='flexa g5 cp' onClick={() => { setpop(true) }}>{<ImageIcon style={{ color: "rgb(112, 181, 249)", backgroundColor: "transparent" }} />} <p>Media</p></div>
+                <div className='flexa g5 cp' onClick={() => { setpop(true) }}>{<EventNoteIcon style={{ color: "rgb(231, 163, 62)", backgroundColor: "transparent" }} />} <p>Event</p></div>
+                <div className='flexa g5 cp' onClick={() => { setpop(true) }}>{<Article style={{ color: "rgb(245, 152, 126)", backgroundColor: "transparent" }} />} <p>Write Article</p></div>
               </div>
             </div>
             <br />
@@ -229,7 +238,7 @@ function page() {
             {/* map to feed  */}
 
             {post && post.map((item, index) => (
-              <Post item={item} deletePost={deletePost} setpop={setpop} popEdit={popEdit} setPopEdit={setPopEdit} modifyTitle={modifyTitle} setModifyTitle={setModifyTitle} modifyContent={modifyContent} setModifyContent={setModifyContent} modifyPostID={modifyPostID} setModifyPostID={setModifyPostID} />
+              <Post item={item} deletePost={deletePost} setpop={setpop} popEdit={popEdit} setPopEdit={setPopEdit} modifyTitle={modifyTitle} setModifyTitle={setModifyTitle} modifyContent={modifyContent} setModifyContent={setModifyContent} modifyPostID={modifyPostID} setModifyPostID={setModifyPostID} index={index} />
 
 
             ))}

@@ -9,12 +9,12 @@ import { createContext, useEffect, useState } from 'react'
 
 
 
-export const context=createContext();
+export const context = createContext();
 export default function RootLayout({ children }) {
-  const [ showNavbar, setShowNavbar] =  useState(true);
-  const [show ,setshow]=useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [show, setshow] = useState(false);
   const [toggle, setToggle] = useState(false)
-  const [popEdit, setPopEdit] =  useState(false);
+  const [popEdit, setPopEdit] = useState(false);
   // const [loginId, setLoginId] = useState("");
   // const [theme, setTheme] = useState("light-theme");
 
@@ -23,17 +23,17 @@ export default function RootLayout({ children }) {
   // }
 
 
-  useEffect(()=>{
-if(localStorage.getItem("token")){
-    setshow(true);
-} 
-  },[])
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setshow(true);
+    }
+  }, [])
   return (
     <html lang="en">
       <body className='light-theme'>
-        <context.Provider value={{show,setshow,setShowNavbar, showNavbar, toggle, setToggle, popEdit, setPopEdit}}>
-       {showNavbar && <Navbar />}
-        {children}
+        <context.Provider value={{ show, setshow, setShowNavbar, showNavbar, toggle, setToggle, popEdit, setPopEdit }}>
+          {showNavbar && <Navbar />}
+          {children}
         </context.Provider>
       </body>
 

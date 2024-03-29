@@ -3,10 +3,18 @@ import React, { useState, useEffect } from 'react'
 import "./MyProfile.css"
 import Box from '@mui/material/Box';
 import CreateIcon from '@mui/icons-material/Create';
+import { Avatar } from '@mui/material';
+import { userCoverPic } from '../(Constants)/Assets';
 
 function page() {
     const [userDetailPop, setUserDetailPop] = useState(false);
+    const [localStorageValue, setLocalStorageValue] = useState()
 
+    useEffect(()=>{
+        const value = localStorage.getItem("name")
+        setLocalStorageValue(value)
+    }, [])
+    
     return (
 
         <div className=' myprofileContainer flex'>
@@ -41,9 +49,17 @@ function page() {
                 </div>
             </div>}
             <Box sx={{ mt: "25px", width: "1130px", display: "flex", height: "450px" }} >
-                <div className='userCoverProfile flexc mr30'>
-                    <div className='headercover'></div>
-                    <div className='profileCoverImg'></div>
+                <div className='userCoverProfile flexc mr30 '>
+                    <div className='headercover'>{userCoverPic}</div>
+                    <div className='profileCoverImg'>
+                    <Avatar sx={{scale: "3.3", marginLeft: "44px", marginTop: "43px"}}>
+                    {localStorageValue
+                      ? `${JSON.parse(localStorageValue)
+                          .slice(0, 1)
+                          .toUpperCase()}`
+                      : ""}
+                  </Avatar>
+                    </div>
                     <div className='footerCover flex flexa'>
                         <p className='mr20 mt10 flexja cp' onClick={() => { setUserDetailPop(true) }}>{<CreateIcon />}</p>
 
