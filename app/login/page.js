@@ -41,36 +41,44 @@ const Login = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(signUpApi,
-        {
-          method: "POST",
-          headers: {
-            projectID: "i1dieevrt9g1",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: name,
-            email: email,
-            password: password,
-            appType: 'linkedin'
-          }),
+      if (password != "" && email != "" && name != "") {
+
+        const response = await fetch(signUpApi,
+          {
+            method: "POST",
+            headers: {
+              projectID: "i1dieevrt9g1",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: name,
+              email: email,
+              password: password,
+              appType: 'linkedin'
+            }),
+          }
+        );
+        const data = await response.json();
+        console.log("Signup", data);
+
+        if (data.status === "success") {
+          const token = data.token;
+          localStorage.setItem('name', JSON.stringify(data.data.user.name));
+          localStorage.setItem('token', JSON.stringify(token));
+          localStorage.setItem("id", data.data.user._id);
+          router.push('/')
+
+        } else if (data.message === 'User already exists') {
+          alert('user already exists')
         }
-      );
-      const data = await response.json();
-      console.log("Signup", data);
-      if (data.status === "success") {
-        const token = data.token;
-        localStorage.setItem('name', JSON.stringify(data.data.user.name));
-        localStorage.setItem('token', JSON.stringify(token));
-        localStorage.setItem("id", data.data.user._id);
-        router.push('/')
-      } else if (data.message === 'User already exists') {
-        alert('user already exists')
-      } else if (data.message === "Invalid input data. A user must have a name. A user must have an email") {
+         else if (data.message === "Invalid input data. A user must have a name. A user must have an email") {
+          alert("please fill all the details!")
+        }
+      }else{
         alert("please fill all the details!")
       }
-
-    } catch (error) {
+    } 
+    catch (error) {
       alert(error);
     }
   };

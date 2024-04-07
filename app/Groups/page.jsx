@@ -4,11 +4,21 @@ import "./groupStyle.css";
 
 import Box from "@mui/material/Box";
 import CreateSpaceButton from "../(CreateGroup)/CreateSpaceButton";
+import { useRouter } from "next/navigation";
+
+
 
 export default function page() {
   const [activegroupColor, setActivegroupColor] = useState(false);
   const [getGroup, setGetGroup] = useState([]);
   // const [groupList, setGroupList] = useState([]);
+
+  const router = useRouter();
+
+  function navigate(id){
+    router.push(`/GroupInfo/${id}`)
+  }
+
 
   const getChannel = async () => {
     try {
@@ -24,7 +34,7 @@ export default function page() {
       );
       const result = await response.json();
       setGetGroup(result.data);
-      // console.log("he", result.data);
+      console.log("he", result.data);
     } catch (error) {
       // console.log(error, "error");
     }
@@ -53,15 +63,17 @@ export default function page() {
         }}
       >
         <div className="headerGroup flex flexjsb flexa">
-          <span>Your groups</span>
+          <span className="yourGroup fnt14 cp">Your groups</span>
+          
           <span>{<CreateSpaceButton getChannel={getChannel} />}</span>
         </div>
-        <div className="groupList p20 g10">
+        <div className="groupList p20">
           <ul>
             {getGroup &&
               getGroup.map((item, index) => 
-              <div key={index}>
-                <li>{item.name}</li>
+              <div key={index} className="flex flexja g5">
+                <div className="flex">{item.image != null ? <img className="groupDetailsImg" src={item.image}/> : <p className="groupProfileImg flex flexja">{`${item.name.slice(0,1).toUpperCase()}`}</p>}</div>
+                <li className="flex flexa" onClick={()=>{navigate(item._id)}}>{item.name}</li>
               </div>)}
           </ul>
         </div>

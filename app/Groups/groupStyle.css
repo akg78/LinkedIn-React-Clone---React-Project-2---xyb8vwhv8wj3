@@ -7,7 +7,6 @@
   position: relative;
   height: 100vh;
   width: 100%;
-  /* justify-content: center; */
   background-color: #f4f2ee;
 }
 
@@ -17,12 +16,20 @@
   padding: 0px 10px 0px 10px;
 }
 
+.yourGroup{
+  border-bottom: 2px solid #01754f;
+  color: #01754f;
+  font-weight: 600;
+  margin-top: 12px;
+  padding: 10px;
+}
+
 .groupList {
   width: 97.4%;
   height: 610px;
   overflow-y: scroll;
-  
 }
+
 .groupList::-webkit-scrollbar{
   display: none;
 }
@@ -32,10 +39,24 @@
 }
 .groupList li{
   height: 60px;
+  width: 100%;
   border-bottom: 1px solid rgba(128, 128, 128, 0.181);
-  
+  cursor: pointer;
 }
 
 .groupList li:hover{
-  background-color: #eae5e5;
+  text-decoration: underline;
+  color: #0a66c2;
+}
+
+.groupDetailsImg{
+  height: 56px;
+  width: 56px;
+}
+
+.groupProfileImg{
+  height: 56px;
+  width: 56px;
+  background-color: #1F6CFA;
+  text-align: center;
 }

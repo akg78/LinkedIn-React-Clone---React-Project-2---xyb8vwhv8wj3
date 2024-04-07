@@ -1,0 +1,99 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.myprofileContainer {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  background-color: #f4f2ee;
+}
+.userCoverProfile {
+  position: relative;
+  height: 546px;
+  background-color: #fff;
+  border-radius: 7.5px;
+  box-shadow: 0px 0px 0px 0.2px grey;
+}
+
+.mainContainerProfile {
+    width: 72%;
+    padding: 0px 10px 0px 10px;
+    margin: 0px 5px 0px 5px;
+  }
+.userCoverAside {
+  width: 25%;
+  height: 30%;
+  border: 1px solid rgba(128, 128, 128, 0.408);
+  border-radius: 6px;
+  background-color: #fff;
+}
+.headercover {
+  position: relative;
+  height: 47%;
+  width: 100%;
+  /* background-color: rgba(128, 128, 128, 0.422); */
+  border-radius: 6px 6px 0px 0px;
+}
+.footerCover {
+  position: relative;
+  width: 100%;
+  justify-content: flex-end;
+}
+.footerCover p {
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  background-color: #fff;
+  opacity: 0.7;
+}
+
+.footerCover p:hover {
+  background-color: rgba(211, 211, 211, 0.782);
+}
+
+.profileCoverImg {
+  position: absolute;
+  top: 100px;
+  left: 30px;
+  height: 128px;
+  width: 128px;
+  border-radius: 64px;
+}
+
+.hrprofileAside {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(128, 128, 128, 0.359);
+}
+.userDetailsPop {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(83, 82, 82, 0.132);
+}
+.editIntro {
+  position: absolute;
+  left: 380px;
+  top: 100px;
+  height: 400px;
+  width: 600px;
+  background-color: #fff;
+  z-index: 100;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 6px;
+}
+
+.editIntrohr {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(128, 128, 128, 0.359);
+}
+
+.userProfileImgg{
+    height: 40px;
+    width: 40px;
+}
+

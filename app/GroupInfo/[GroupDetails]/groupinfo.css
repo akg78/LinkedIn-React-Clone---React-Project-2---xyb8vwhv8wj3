@@ -1,0 +1,194 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.homeContainer-Group{
+  position: relative;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  background-color: #f4f2ee;
+}
+.sidebarLeft-sidebarLeftGroup {
+  width: 20%;
+  height: 50vh;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 0px 0.2px grey;
+}
+.sidebarDetails-sidebarDetailsgroup {
+  height: 60%;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.181);
+}
+.sidebarDetails-sidebarDetailsgroup .username {
+  margin-top: 45px;
+}
+
+.sidebarDetails-sidebarDetailsgroup p {
+  margin-top: 15px;
+  font-size: 11.5px;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+.userCoverImg-groupcover {
+  position: relative;
+  /* background-color: #378fe9; */
+  height: 23%;
+  width: 100%;
+}
+.userProfilePic-group {
+  position: absolute;
+  top: 45px;
+  margin-right: 15px;
+}
+
+/* end of HomeContainer CSS */
+
+.mainContainer-group {
+  width: 52%;
+  padding: 0px 10px 0px 10px;
+  margin: 0px 5px 0px 5px;
+}
+
+.createPost-group {
+  position: relative;
+  height: 300px;
+  background-color: #fff;
+  border-radius: 7.5px;
+  box-shadow: 0px 0px 0px 0.2px grey;
+}
+
+.groupInfoDp{
+  position: absolute;
+  left: 12px;
+  top: 100px;
+  height: 75px;
+  width: 75px;
+  /* background-color: white; */
+  border: 3px solid whitesmoke;
+}
+
+.groupInfoDp img{
+  height: 70px;
+  width: 71px;
+}
+
+.groupProfiledp{
+  height: 70px;
+  width: 75px;
+  background-color: #1F6CFA;
+  text-align: center;
+}
+
+.composePostFooter-group{
+  width: 100%;
+  height: 80px;
+  margin-top: 38px;
+  justify-content: space-around;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.feedPost-group{
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 0px 0.2px grey;
+  padding: 8px;
+}
+
+
+/* .composeSearch-group {
+  height: 45px;
+  width: 85%;
+  border-radius: 20px;
+  padding: 10px 8px 10px 16px;
+  color: #00000099;
+  font-weight: 551;
+  opacity: 0.8;
+  border: 1px solid #00000087;
+}
+.composeSearch-group:hover {
+  background-color: #00000018;
+  cursor: pointer;
+} */
+
+
+
+
+/*sidebarRight Css*/
+
+.sidebarRight-sidebarRightGroup {
+  height: 800px;
+  width: 28%;
+  border-radius: 8px;
+  /* box-shadow: 0px 0px 0px 0.2px grey; */
+}
+.sideBarNews-group {
+  height: 400px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 0px 0.2px grey;
+  overflow-y: scroll;
+}
+
+.sideBarImg-group {
+  height: 250px;
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 8px;
+  /* box-shadow: 0px 0px 0px 0.2px grey; */
+}
+.sideBarImg-group img {
+  height: 240px;
+  width: 100%;
+  border-radius: 8px;
+}
+.lnews-group {
+  font-size: 0.8rem;
+}
+
+.sideBarNews-group ul {
+  padding: 0px 0px 0px 20px;
+}
+.sideBarNews-group li {
+  /* border: 1px solid black; */
+  height: 50px;
+  width: 100%;
+  margin-top: 20px;
+  padding-left: 5px;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  text-wrap: nowrap;
+  font-size: 0.8rem;
+}
+.sideBarNews-group li:hover {
+  background-color: rgb(221, 224, 224);
+}
+
+.sideBarNews-group a {
+  text-decoration: none;
+  color: black;
+  font-weight: 550;
+}
+
+.desgroup{
+  width: 50%;
+  margin-left: 10px;
+  margin-bottom: 12px;
+}
+
+.groupIcon{
+  width: fit-content;
+  padding: 2px 6px 2px 6px;
+  font-weight: 550;
+ 
+}
+.groupIcon:hover{
+  background-color: rgb(238, 238, 238);
+  border-radius: 6px;
+}
+
+
+
+  

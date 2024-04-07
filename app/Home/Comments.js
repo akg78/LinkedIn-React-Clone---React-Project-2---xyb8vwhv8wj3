@@ -11,6 +11,8 @@ import Edit from '@mui/icons-material/Edit';
 import DeleteForever from '@mui/icons-material/DeleteForever';
 import MenuButton from '@mui/joy/MenuButton';
 import Dropdown from '@mui/joy/Dropdown';
+import { useRouter } from "next/navigation";
+
 
 
 
@@ -31,8 +33,8 @@ export default function Comments({ item, itemm, index, comData, setComData, comm
                 }
             );
             const result = await response.json();
-            // console.log("hhhhhh", result);
             setcommmentAuthor(result.data);
+            // console.log("hhhhhh", result);
 
         } catch (error) {
             // console.log("error", error);
@@ -70,20 +72,27 @@ export default function Comments({ item, itemm, index, comData, setComData, comm
 
     }, []);
 
+
+    const router = useRouter()
+
+    function navigateProfile(id){
+        router.push(`/${id}`)
+    }
+
     return (
         <>
             {itemm && commmentAuthor &&
                 <div className='wrapOtherComments flex  g10 mt10'>
-                    <span className='wrapOthercommentsImg'>{commmentAuthor.author.profileImage !== null ?
-                        <img src={commmentAuthor.author.profileImage} loading='lazy' /> :
-                        <img src={profileImg} loading='lazy' />
+                    <span className='wrapOthercommentsImg'>{itemm.author_details.profileImage !== null ?
+                        <img src={itemm.author_details.profileImage} loading='lazy' /> :
+                        <p className='commentProfile flex flexja'>{`${itemm.author_details.name.slice(0,1).toUpperCase()}`}</p>
                     }
 
                     </span>
                     <div className='otherCommentsSection flex flexjsb p5'>
 
                         <div className='flexc '>
-                            <h5>{commmentAuthor.author.name}</h5>
+                            <h5 className='homeUserName' onClick={()=>{navigateProfile(item.author._id)}}>{itemm.author_details.name}</h5>
                             <p>{itemm.content}</p>
                         </div>
 

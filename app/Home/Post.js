@@ -18,6 +18,8 @@ import { profileImg } from '../(Constants)/Assets';
 import Comments from './Comments';
 import { context } from '../layout';
 import { Avatar } from '@mui/material';
+import { useRouter } from "next/navigation";
+
 
 
 export default function Post({ item, index, deletePost, setpop, popEdit, setPopEdit, modifyTitle, setModifyTitle, modifyContent, setModifyContent, modifyPostID, setModifyPostID }) {
@@ -25,12 +27,12 @@ export default function Post({ item, index, deletePost, setpop, popEdit, setPopE
     const [commentPop, setCommentPop] = useState(false);
     const [comData, setComData] = useState();
     const [like, setLike] = useState();
-    const [commentInput, setCommentInput] = useState(" ");
-    const [commpost, setCommpost] = useState(" ");
+    const [commentInput, setCommentInput] = useState("");
+    const [commpost, setCommpost] = useState("");
     const [activeLike, setActiveLike] = useState(false);
     const { toggle, setToggle } = useContext(context);
     const [dislike, setDislike] = useState()
-
+    const liked = [];
 
     function toggleActive() {
         setActiveLike(!activeLike);
@@ -58,10 +60,32 @@ export default function Post({ item, index, deletePost, setpop, popEdit, setPopE
 
     const [localStorageValue, setLocalStorageValue] = useState();
 
-    useEffect(()=>{
+    useEffect(() => {
+        // for(let i =0; i<=100; i++){
+        //     liked[i]= false;
+        // }
+        // console.log(liked)
         const value = localStorage.getItem("name")
         setLocalStorageValue(value)
     }, [])
+
+
+
+    const [daysDifference, setDaysDifference] = useState(0);
+
+    useEffect(() => {
+      const timestamp = item.createdAt;
+      const dateObject = new Date(timestamp);
+      const intervalId = setInterval(() => {
+        const now = new Date();
+        const timeDifference = now - dateObject;
+        const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        setDaysDifference(daysDifference);
+      }, 1000);
+  
+      return () => clearInterval(intervalId);
+    }, []);
+
 
 
     const commentFetch = async (id) => {
@@ -76,7 +100,7 @@ export default function Post({ item, index, deletePost, setpop, popEdit, setPopE
                 }
             );
             const result = await response.json();
-            // console.log(result.data);
+            console.log("comment get", result.data);
             setComData(result.data);
 
         } catch (error) {
@@ -102,7 +126,7 @@ export default function Post({ item, index, deletePost, setpop, popEdit, setPopE
                 }
             );
             const res = await response.json();
-            // console.log("post Comment", res);
+            console.log("post Comment", res);
             commentFetch(id)
             setCommpost();
 
@@ -113,7 +137,7 @@ export default function Post({ item, index, deletePost, setpop, popEdit, setPopE
 
 
 
-    const likePost = async (id) => {
+    const likePost = async (id, index) => {
         try {
             const response = await fetch(`https://academics.newtonschool.co/api/v1/linkedin/like/${id}`,
                 {
@@ -124,11 +148,16 @@ export default function Post({ item, index, deletePost, setpop, popEdit, setPopE
                     },
                 }
             );
+
             const re = await response.json();
-            // console.log("likeeeee", re)
+            console.log("likeeeee", re)
             setToggle(!toggle);
             setLike(re)
-
+            liked[index] = true;
+            // for(let j = 0; j<=100; j++){
+            //     console.log(liked[j])   
+            // }
+            console.log(liked)
 
         } catch (error) {
             // console.log(error, "error")
@@ -156,15 +185,33 @@ export default function Post({ item, index, deletePost, setpop, popEdit, setPopE
         }
     }
 
+    const router = useRouter()
+
+    function navigateProfile(id){
+        router.push(`/${id}`)
+    }
+
+
+
+    
+
+   
+
+
+
+
+
+
+
     return (
         <div key={index} className="feedPost mt10 ">
             <div className='flex dotdelete'>
-                <Dropdown>
+                {item.author._id === localStorage.getItem("id") && <Dropdown>
                     <MenuButton
                         slots={{ root: IconButton }}
                         slotProps={{ root: { color: 'neutral' } }}
                     >
-                        {item.author._id === localStorage.getItem("id") && <MoreVert />}
+                        <MoreVert />
                     </MenuButton>
                     <Menu placement="bottom-end">
                         <MenuItem onClick={() => { setPopEdit(true); setModifyTitle(item.title); setModifyContent(item.content); setModifyPostID(item._id) }}>
@@ -181,16 +228,16 @@ export default function Post({ item, index, deletePost, setpop, popEdit, setPopE
                             Delete
                         </MenuItem>
                     </Menu>
-                </Dropdown>
+                </Dropdown>}
             </div>
 
-            <div className=' postHeader flex g10 flexa p20'>
-                <div className='imgHeader '> {item.author.profileImage !== null ? <img src={item.author.profileImage} loading="lazy" /> : <img src={profileImg} loading="lazy" />} </div>
+            <div className=' postHeader flex g10 flexa p10' onClick={()=>{navigateProfile(item.author._id)}}>
+                <div className='imgHeader '> {item.author.profileImage !== null ? <img src={item.author.profileImage} loading="lazy" /> : <p className='flex flexja postImgStatic'>{item.author.name.slice(0,1).toUpperCase()}</p>} </div>
                 <div className='headingHeader'>
-                    <h5>{item.author.name}</h5>
+                    <h5 className='homeUserName'>{item.author.name}</h5>
                     <p>{item.title}</p>
-                    <div className='flex'>
-                        <span>w <BiWorld /></span>
+                    <div className='flex fnt12 txt4 '>
+                        <span>{daysDifference}d. <BiWorld /></span>
                     </div>
                 </div>
             </div>
@@ -207,7 +254,7 @@ export default function Post({ item, index, deletePost, setpop, popEdit, setPopE
                 </div>
                 <hr className='hrPostt' />
                 <div className='dis-btn flex p5'>
-                    {<div className='flex g5 p20 ' onClick={() => { likePost(item._id), toggleActive() }}><p><ThumbUpIcon className={activeLike ? 'active' : 'inactive'} /></p>Like</div>}
+                    {<div className='flex g5 p20 ' onClick={() => { likePost(item._id, index), toggleActive() }}><p><ThumbUpIcon className={activeLike ? 'active' : 'inactive'} /></p>Like</div>}
                     {/* {like.status === "success" && <div className='flex g5 p20 ' onClick={()=>{deslikePost(item._id)}}><p><ThumbUpIcon className={activeLike ? 'inactive' : 'active'} /></p>dislike</div>} */}
                     <div className='flex g5 p20' onClick={() => { setCommentPop(!commentPop); commentFetch(item._id) }}><p><FaRegCommentDots /></p>Comments</div>
                     {/* <div className='flex g5 p20'><p><FaShare /></p>Share</div> */}
@@ -216,9 +263,9 @@ export default function Post({ item, index, deletePost, setpop, popEdit, setPopE
 
             {commentPop && <div className='commentPop'>
                 <div className='flex wrapSelfcomments g10 flexa'>
-                    <div><Avatar>{localStorageValue ? `${JSON.parse(localStorageValue).slice(0,1).toUpperCase()}` : ""}</Avatar></div>
+                    <div><Avatar sx={{backgroundColor: "#1F6CFA"}}>{localStorageValue ? `${JSON.parse(localStorageValue).slice(0, 1).toUpperCase()}` : ""}</Avatar></div>
 
-                    <input type='text' placeholder='Add a comments...' value={commentInput} onChange={(e) => { setCommentInput(e.target.value) }} onKeyUp={(e) => { commentFun(e, item._id) }} />
+                    <input type='text' value={commentInput} onChange={(e) => { setCommentInput(e.target.value) }} onKeyUp={(e) => { commentFun(e, item._id) }} placeholder='Add a comments...'/>
                 </div>
 
                 {comData && comData.map((itemm, index) =>

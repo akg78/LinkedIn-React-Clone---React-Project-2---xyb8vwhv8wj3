@@ -20,8 +20,9 @@ import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { context } from "../layout";
-import { FormControlLabel } from "@mui/material";
+import { FormControlLabel, Modal } from "@mui/material";
 import Switch from "@mui/material/Switch";
+import { useRouter } from "next/navigation";
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -76,7 +77,53 @@ function Navbar() {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [token, setToken] = useState();
   const [localStorageValue, setLocalStorageValue] = useState();
+  const [searchInput, setSearchInput] = useState("");
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [searchUser, setSearchUser] = useState([]);
 
+  const SearchBar = async () => {
+    try {
+      const response = await fetch(
+        `https://academics.newtonschool.co/api/v1/linkedin/post?limit=${"100"}`,
+        {
+          method: "GET",
+          headers: {
+            ProjectID: "i1dieevrt9g1",
+          },
+        }
+      );
+      const result = await response.json();
+      setSearchUser(result.data);
+      console.log("searchBar", result);
+    } catch (error) {
+      // console.log("error", error);
+    }
+  };
+
+  useEffect(() => {
+    SearchBar();
+  }, []);
+
+  const fetchSearch = async () => {
+    try {
+      const response = await fetch(
+        `https://academics.newtonschool.co/api/v1/linkedin/post?search={"author.name":"${searchInput}"}`,
+        {
+          method: "GET",
+          headers: {
+            ProjectID: "i1dieevrt9g1",
+          },
+        }
+      );
+      const result = await response.json();
+      console.log("searchApi", result);
+      // setcommmentAuthor(result.data);
+    } catch (error) {
+      // console.log("error", error);
+    }
+  };
 
   // const [loginShow, setLoginShow] = useState(false);
 
@@ -146,16 +193,59 @@ function Navbar() {
     setTheme(theme === "light-theme" ? "dark-theme" : "light-theme");
   };
 
-  useEffect(()=>{
-    const value = localStorage.getItem("name")
-    setLocalStorageValue(value)
-}, [])
+  useEffect(() => {
+    fetchSearch();
+    const value = localStorage.getItem("name");
+    setLocalStorageValue(value);
+  }, [searchInput]);
+
+  const router = useRouter();
+
+  function navigateToProfile(){
+    router.push(`/${localStorage.getItem("id")}`)
+  }
 
   return (
     <>
       {show && (
         // <Box sx={{display: "flex", justifyContent:"center", width: "100vw", overflowY: "hidden"}}>
-        <Container maxWidth="xl" sx={{ display: "flex" }}>
+        <Container maxWidth="xl" sx={{ display: "flex", position: "relative" }}>
+          {/* {open &&<div className=""><SearchPop setOpen={setOpen} handleClose={handleClose} handleOpen={handleOpen}/></div> } */}
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box
+              sx={{
+                position: "absolute",
+                top: "11.2%",
+                left: "30.5%",
+                transform: "translate(-50%, -50%)",
+                width: 450,
+                bgcolor: "background.paper",
+                p: 4,
+                borderRadius: "6px",
+                boxShadow: 24,
+                flexDirection: "column",
+              }}
+            >
+              <Typography sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                <SearchIcon />
+                <Link href="UserDetails"></Link>
+                {/* {searchUser.map((item, index) => (
+                  <span key={index} className="flex flexc">
+                    <p>{item.author.name}</p>
+                  </span>
+                ))} */}
+              </Typography>
+
+              {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                    </Typography> */}
+            </Box>
+          </Modal>
           <Toolbar
             disableGutters
             sx={{
@@ -177,7 +267,10 @@ function Navbar() {
             </Box>
 
             <Box sx={{ ml: "10px" }}>
-              <Search sx={{ height: "40px", backgroundColor: "#edf3f8" }}>
+              <Search
+                sx={{ height: "40px", backgroundColor: "#edf3f8" }}
+                onClick={handleOpen}
+              >
                 <SearchIconWrapper sx={{ scale: "0.90", color: "#000000de" }}>
                   <SearchIcon />
                 </SearchIconWrapper>
@@ -185,6 +278,8 @@ function Navbar() {
                   sx={{ scale: "1", color: "#000000de" }}
                   placeholder="Search…"
                   inputProps={{ "aria-label": "search" }}
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
                 />
               </Search>
             </Box>
@@ -281,8 +376,12 @@ function Navbar() {
             </Box>
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Me">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} disableRipple>
-                  <Avatar>
+                <IconButton
+                  onClick={handleOpenUserMenu}
+                  sx={{ p: 0 }}
+                  disableRipple
+                >
+                  <Avatar sx={{ backgroundColor: "#1F6CFA" }}>
                     {localStorage.getItem("name")
                       ? `${JSON.parse(localStorage.getItem("name"))
                           .slice(0, 1)
@@ -330,7 +429,7 @@ function Navbar() {
                   >
                     <div className="flex flexa g10 navuserwrap">
                       <span>
-                        <Avatar>
+                        <Avatar sx={{ backgroundColor: "#1F6CFA" }}>
                           {localStorageValue
                             ? `${JSON.parse(localStorageValue)
                                 .slice(0, 1)
@@ -350,7 +449,9 @@ function Navbar() {
                       </p>
                     </div>
 
-                    <Link
+                    <p onClick={()=>{
+                      navigateToProfile()
+                    }}
                       style={{
                         textDecoration: "none",
                         color: " black",
@@ -361,10 +462,9 @@ function Navbar() {
                         color: "#0a66c2",
                         fontWeight: "600",
                       }}
-                      href="MyProfile"
                     >
                       View Profile
-                    </Link>
+                    </p>
                     <span className="hrCreatePost"></span>
                     <Link
                       style={{ textDecoration: "none", color: " black" }}

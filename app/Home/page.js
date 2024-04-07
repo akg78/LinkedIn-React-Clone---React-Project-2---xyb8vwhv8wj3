@@ -14,9 +14,8 @@ import Edit from './Edit';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Link from 'next/link';
-import CreateSpaceButton from '../(CreateGroup)/CreateSpaceButton';
-import Loader from '../(Components)/Loader';
-import { articleIcon, eventIcon, mediaIcon, sideBarImg, userCoverPic, userCoverPicHome } from '../(Constants)/Assets';
+// import Loader from '../(Components)/Loader';
+import { sideBarImg, userCoverPicHome } from '../(Constants)/Assets';
 // import index from 'toastify';
 import { Article } from '@mui/icons-material';
 import { Avatar } from '@mui/material';
@@ -68,7 +67,7 @@ function page() {
         const response = await fetch(url);
         const data = await response.json();
         setNews(data.articles);
-        // console.log("jhhhhhh", data)
+        console.log("jhhhhhh", data)
       } catch (error) {
         // console.log("error", error);
       }
@@ -128,14 +127,6 @@ function page() {
   }
 
 
-  const originalTimestamp = new Date("2023-08-21T12:15:26.147Z");
-
-  const currentTimestamp = new Date();
-
-  const differenceInMillis = currentTimestamp - originalTimestamp;
-
-  const millisecondsInAWeek = 1000 * 60 * 60 * 24 * 7;
-  const numberOfWeeks = Math.floor(differenceInMillis / millisecondsInAWeek);
 
 
   // published time for news
@@ -194,7 +185,7 @@ function page() {
           <div className='sidebarLeft'>
             <div className='flexc sidebarDetails flexa'>
               <div className='userCoverImg'>{userCoverPicHome}</div>
-              <div className='userProfilePic'><Avatar sx={{ scale: "1.8", marginLeft: "15px", marginTop: "15px" }}>{localStorageValue ? `${JSON.parse(localStorageValue).slice(0, 1).toUpperCase()}` : ""}</Avatar></div>
+              <div className='userProfilePic'><Avatar sx={{ backgroundColor: "#1F6CFA",  scale: "1.8", marginLeft: "15px", marginTop: "15px" }}>{localStorageValue ? `${JSON.parse(localStorageValue).slice(0, 1).toUpperCase()}` : ""}</Avatar></div>
               <Link className='username' href='MyProfile' style={{
                 textDecoration: "none",
                 color: "#000",
@@ -223,7 +214,7 @@ function page() {
           <div className='mainContainer'>
             <div className='createPost p5'>
               <div className='composePost flex flexa' onClick={() => { setpop(true) }}>
-                <div><Avatar>{localStorageValue ? `${JSON.parse(localStorageValue).slice(0, 1).toUpperCase()}` : ""}</Avatar></div>
+                <div><Avatar sx={{backgroundColor: "#1F6CFA"}}>{localStorageValue ? `${JSON.parse(localStorageValue).slice(0, 1).toUpperCase()}` : ""}</Avatar></div>
                 <div className='composeSearch flexa p20 fnt14 '>Start a post</div>
               </div>
               <div className=' composePostFooter flex flexa'>
@@ -233,7 +224,7 @@ function page() {
               </div>
             </div>
             <br />
-            <div className='flex flexa g10 sortBy' ><hr className='hrhome mt5 ml5 ' /> Sort by:</div>
+            {/* <div className='flex flexa g10 sortBy' ><hr className='hrhome mt5 ml5 ' /></div> */}
 
             {/* map to feed  */}
 

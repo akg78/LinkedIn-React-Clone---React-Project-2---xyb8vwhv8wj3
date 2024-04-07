@@ -258,6 +258,13 @@ body{
   color: black;
 }
 
+.txt9{
+  color: #00000099;
+}
+.txt10{
+  color: #000000e6;
+}
+
 .logocolor {
   color: #f52936;
 }
@@ -418,4 +425,8 @@ body{
 
 .inactive{
   color: #7a7a7a;
+}
+
+.bullets{
+  list-style-type: none;
 }

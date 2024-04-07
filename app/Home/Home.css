@@ -221,7 +221,7 @@
 
 .hrhome {
   height: 1.5px;
-  width: 80%;
+  width: 100%;
   background-color: #00000099;
 }
 .sortBy {
@@ -289,10 +289,32 @@
 
 .postHeader {
   height: 85px;
+  width: 40%;
+}
+.homeUserName{
+  width: fit-content;
+  cursor: pointer;
+}
+.homeUserName:hover{
+  text-decoration: underline;
+  color: #0a66c2;
+
+}
+
+.sidebarLink:hover{
+  text-decoration: underline;
+  color: #0a66c2;
 }
 .imgHeader {
   width: 55px;
   height: 55px;
+}
+.postImgStatic{
+  width: 55px;
+  height: 55px;
+  background-color: #1F6CFA;
+  border-radius: 100%;
+  color: white;
 }
 .headingHeader {
   width: 170px;
@@ -358,4 +380,15 @@
   /* width: 50%; */
   float: right;
   justify-content: flex-end;
+}
+
+
+.commentProfile{
+  height: 36px;
+  width: 36px;
+  border-radius: 18px;
+  background-color: #1F6CFA;
+  color: white;
+
+
 }
