@@ -4,7 +4,10 @@ import "./Messages.css";
 
 function Messages() {
   return (
-    <div className='mainContainerMessage'>Messages</div>
+    <div className='mainContainerMessage'>
+      <div className='ImgRender'>
+      </div>
+    </div>
   )
 }
 

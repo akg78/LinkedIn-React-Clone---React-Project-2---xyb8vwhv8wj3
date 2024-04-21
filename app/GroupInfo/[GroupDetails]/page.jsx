@@ -9,14 +9,25 @@ import Link from "next/link";
 // import { sideBarImg, userCoverPicHome } from '../(Constants)/Assets';
 // import index from 'toastify';
 import { Avatar } from "@mui/material";
-import { sideBarImg, userCoverPicHome } from "@/app/(Constants)/Assets";
+import {
+  getNewsList,
+  userCoverPicHome,
+} from "@/app/(Constants)/Assets";
 import { useRouter } from "next/navigation";
-import GroupsIcon from '@mui/icons-material/Groups';
+import GroupsIcon from "@mui/icons-material/Groups";
+import { FaCircleDot } from "react-icons/fa6";
+import { IoChevronDown } from "react-icons/io5";
+import { IoChevronUp } from "react-icons/io5";
 
 export default function page(props) {
   const [localStorageValue, setLocalStorageValue] = useState();
   const [getId, setGetId] = useState({});
   const router = useRouter();
+
+  const newsList = getNewsList();
+  const splicedList = newsList.slice(0, 5);
+  const [showLess, setShowLess] = useState(false);
+  const [newsArray, setNewsArray] = useState(splicedList);
 
   const getChannelid = async () => {
     try {
@@ -32,10 +43,20 @@ export default function page(props) {
       );
       const result = await response.json();
       setGetId(result.data);
-      console.log("heeee", result);
+      // console.log("heeee", result);
     } catch (error) {
       // console.log(error, "error");
     }
+  };
+
+  const handleShowMore = () => {
+    setShowLess(true);
+    setNewsArray(newsList);
+  };
+
+  const handleShowLess = () => {
+    setShowLess(false);
+    setNewsArray(splicedList);
   };
 
   useEffect(() => {
@@ -61,7 +82,12 @@ export default function page(props) {
                 </div>
                 <div className="userProfilePic-group">
                   <Avatar
-                    sx={{ backgroundColor: "#1F6CFA", scale: "1.8", marginLeft: "15px", marginTop: "15px" }}
+                    sx={{
+                      backgroundColor: "#1F6CFA",
+                      scale: "1.8",
+                      marginLeft: "15px",
+                      marginTop: "15px",
+                    }}
                   >
                     {localStorageValue
                       ? `${JSON.parse(localStorageValue)
@@ -71,14 +97,19 @@ export default function page(props) {
                   </Avatar>
                 </div>
 
-                <h4 className="username cp"
+                <h4
+                  className="username cp"
                   onClick={() => {
                     navigateProfile(getId.owner._id);
                   }}
                 >
                   {/* {getId.owner.name} */}
-                {localStorageValue ? `${JSON.parse(localStorageValue).charAt(0).toUpperCase() + JSON.parse(localStorageValue).slice(1)}` : ""}
-
+                  {localStorageValue
+                    ? `${
+                        JSON.parse(localStorageValue).charAt(0).toUpperCase() +
+                        JSON.parse(localStorageValue).slice(1)
+                      }`
+                    : ""}
                 </h4>
                 <p>joined at :{getId.createdAt}</p>
 
@@ -109,12 +140,25 @@ export default function page(props) {
             <div className="createPost-group">
               {userCoverPicHome}
               <span className="groupInfoDp">
-                <div className="flex">{getId.image != null ? <img src={getId.image} /> : <p className="groupProfiledp flex flexja fnt20">{getId.name != null ? `${getId.name.slice(0,1).toUpperCase()}` : ""}</p>}</div>
+                <div className="flex">
+                  {getId.image != null ? (
+                    <img src={getId.image} />
+                  ) : (
+                    <p className="groupProfiledp flex flexja fnt20">
+                      {getId.name != null
+                        ? `${getId.name.slice(0, 1).toUpperCase()}`
+                        : ""}
+                    </p>
+                  )}
+                </div>
               </span>
               <div className="flex flexc composePostFooter-group">
                 <span className="fnt18 w600 ml10 ">{getId.name}</span>
                 <span className="desgroup">{getId.description}</span>
-                <div className="flex flexja groupIcon ml10 mt10 fnt13 txt5 g5 cp"><GroupsIcon sx={{height: "0.9em", width: "0.9em"}}/>Public Group</div>
+                <div className="flex flexja groupIcon ml10 mt10 fnt13 txt5 g5 cp">
+                  <GroupsIcon sx={{ height: "0.9em", width: "0.9em" }} />
+                  Public Group
+                </div>
               </div>
             </div>
             {/* map to feed  */}
@@ -123,22 +167,31 @@ export default function page(props) {
               <p className="fnt14 txt6">No posts available</p>
             </div>
           </div>
+
           <div className="sidebarRight-sidebarRightGroup flexc">
             <div className="sideBarNews-group">
-              <h4 className="pl20 pt10 lnews-group">Linkedin News</h4>
-              <ul>
-                {/* {news && news.map((item, index) => (
-                <li key={index}>
-                  <a href={item.url}>{item.title}</a>
-                  <p className='fnt12 txt2'>{item.publishedAt}</p>
-                </li>
-              ))} */}
-              </ul>
-            </div>
-            <div className="sideBarImg-group">
-              <Link href="TryPremium">
-                <img src={sideBarImg} />
-              </Link>
+              <h4 className="pl20 pt10 lnews-group txt10">Linkedin News</h4>
+              <div>
+                {newsArray.map((data, i) => {
+                  return (
+                    <div key={i}>
+                      <div className="sideBarNewsList">
+                        <p className="flex flexa g10">
+                          <FaCircleDot style={{ scale: "0.5" }} />{" "}
+                          {data.headLine}
+                        </p>
+                        <p className="pl20 fnt11 ml5 txt4">
+                          {data.telecastedAt} ago
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+                <button onClick={showLess ? handleShowLess : handleShowMore}>
+                  {showLess ? "Show less" : "Show more"}{" "}
+                  {showLess ? <IoChevronUp /> : <IoChevronDown />}
+                </button>
+              </div>
             </div>
           </div>
         </Box>

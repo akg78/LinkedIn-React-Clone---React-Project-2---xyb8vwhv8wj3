@@ -59,6 +59,7 @@
   box-shadow: 0px 0px 0px 0.2px grey;
 }
 
+
 .groupInfoDp{
   position: absolute;
   left: 12px;
@@ -121,15 +122,13 @@
   height: 800px;
   width: 28%;
   border-radius: 8px;
-  /* box-shadow: 0px 0px 0px 0.2px grey; */
 }
 .sideBarNews-group {
-  height: 400px;
   width: 100%;
+  padding: 10px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0px 0px 0px 0.2px grey;
-  overflow-y: scroll;
 }
 
 .sideBarImg-group {
@@ -137,7 +136,6 @@
   width: 100%;
   margin-top: 20px;
   border-radius: 8px;
-  /* box-shadow: 0px 0px 0px 0.2px grey; */
 }
 .sideBarImg-group img {
   height: 240px;
@@ -148,28 +146,29 @@
   font-size: 0.8rem;
 }
 
-.sideBarNews-group ul {
-  padding: 0px 0px 0px 20px;
-}
-.sideBarNews-group li {
-  /* border: 1px solid black; */
+.sideBarNewsList{
   height: 50px;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 10px;  
   padding-left: 5px;
   text-overflow: ellipsis;
-  overflow-x: hidden;
   text-wrap: nowrap;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
-.sideBarNews-group li:hover {
+.sideBarNewsList:hover {
   background-color: rgb(221, 224, 224);
 }
 
-.sideBarNews-group a {
-  text-decoration: none;
-  color: black;
+.sideBarNews-group button{
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 4px;
   font-weight: 550;
+  color: #000000e6;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .desgroup{

@@ -7,6 +7,7 @@
   align-items: center;
   justify-content: center;
   border: none;
+  z-index: 1000000;
 }
 
 .MuiBox-root {
@@ -50,14 +51,68 @@
   left: 10px;
 }
 
-.openSearchPop {
+/* .openSearchPop {
   position: absolute;
   height: 300px;
   width: 300px;
   background-color: blue;
-  z-index: 10000000;
-}
+} */
 
 .css-i9fmh8-MuiBackdrop-root-MuiModal-backdrop{
   margin-top: 50px;
+}
+
+.searchuserImg img{
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+}
+
+.staticImgSearch{
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background-color: #1F6CFA;
+}
+.wrapsearchnameandimg{
+  /* border-bottom: 1px solid rgba(128, 128, 128, 0.332); */
+  padding-left: 15px;
+}
+
+.wrapsearchnameandimg:hover{
+  background-color: lightgray;
+}
+
+/* .css-i9fmh8-MuiBackdrop-root-MuiModal-backdrop{
+  z-index: 10000;
+} */
+
+.searchinput{
+  position: relative;
+  margin-left: 20px;
+  height: 35px;
+  width: 20%;
+  background-color: #edf3f8;
+
+
+}
+.searchinput input{
+  height: 35px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+
+}
+
+.childSearchinput{
+  position: absolute;
+  top: 100%;
+  /* left: 1%; */
+  height: 450px;
+  width: 450px;
+  border-radius: 6px;
+  flex-direction: column;
+  background-color: #fff;
+  overflow-y: scroll;
+
 }

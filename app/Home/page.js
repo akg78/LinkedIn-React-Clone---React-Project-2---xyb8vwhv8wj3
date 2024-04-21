@@ -15,34 +15,22 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Link from 'next/link';
 // import Loader from '../(Components)/Loader';
-import { sideBarImg, userCoverPicHome } from '../(Constants)/Assets';
+import { getNewsList, sideBarImg, userCoverPicHome } from '../(Constants)/Assets';
 // import index from 'toastify';
 import { Article } from '@mui/icons-material';
 import { Avatar } from '@mui/material';
+import { FaCircleDot } from "react-icons/fa6";
+import { IoChevronDown } from "react-icons/io5";
+import { IoChevronUp } from "react-icons/io5";
+
 
 
 
 function page() {
-
-
-  // const [anchorEl, setAnchorEl] = useState(null);
-  // const open = Boolean(anchorEl);
-  // const handleClick = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  // };
-
-
-
-  // const [isLoading, setIsLoading] = useState(true);
-
-
   const [pop, setpop] = useState(false);
   const [post, setPost] = useState([]);
-  const [likeCount, setLikeCount] = useState(0)
-  const [liked, setLiked] = useState(false);
+  // const [likeCount, setLikeCount] = useState(0)
+  // const [liked, setLiked] = useState(false);
   const [activenav, setactivenav] = useState("");
   const { show, setshow, setShowNavbar, showNavbar, toggle, setToggle, popEdit, setPopEdit } = useContext(context);
   const [postTitle, setPostTitle] = useState();
@@ -51,30 +39,12 @@ function page() {
   const [modifyTitle, setModifyTitle] = useState("");
   const [modifyContent, setModifyContent] = useState("");
   const [modifyPostID, setModifyPostID] = useState("");
-  const [news, setNews] = useState([]);
-  const NewsapiKey = "571d954539a24684b8e1e1ee4f23bb87";
   const [localStorageValue, setLocalStorageValue] = useState();
 
-
-
-
-  // -------------------------fetch API News --------------------------------
-
-  useEffect(() => {
-    async function newsFetch() {
-      const url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${NewsapiKey}`;
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        setNews(data.articles);
-        console.log("jhhhhhh", data)
-      } catch (error) {
-        // console.log("error", error);
-      }
-    }
-    newsFetch();
-  }, []);
-
+  const newsList = getNewsList();
+  const splicedList = newsList.slice(0, 5);
+  const [showLess, setShowLess] = useState(false);
+  const [newsArray, setNewsArray] = useState(splicedList);
 
 
 
@@ -127,6 +97,15 @@ function page() {
   }
 
 
+  const handleShowMore = () => {
+    setShowLess(true);
+    setNewsArray(newsList);
+  };
+
+  const handleShowLess = () => {
+    setShowLess(false);
+    setNewsArray(splicedList);
+  };
 
 
   // published time for news
@@ -167,10 +146,10 @@ function page() {
   }, [])
 
 
-  useEffect(()=>{
+  useEffect(() => {
     const value = localStorage.getItem("name")
     setLocalStorageValue(value)
-}, [])
+  }, [])
 
   // const notify = () => toast.info("Under Construction!",{autoClose:3000})
 
@@ -185,7 +164,7 @@ function page() {
           <div className='sidebarLeft'>
             <div className='flexc sidebarDetails flexa'>
               <div className='userCoverImg'>{userCoverPicHome}</div>
-              <div className='userProfilePic'><Avatar sx={{ backgroundColor: "#1F6CFA",  scale: "1.8", marginLeft: "15px", marginTop: "15px" }}>{localStorageValue ? `${JSON.parse(localStorageValue).slice(0, 1).toUpperCase()}` : ""}</Avatar></div>
+              <div className='userProfilePic'><Avatar sx={{ backgroundColor: "#1F6CFA", scale: "1.8", marginLeft: "15px", marginTop: "15px" }}>{localStorageValue ? `${JSON.parse(localStorageValue).slice(0, 1).toUpperCase()}` : ""}</Avatar></div>
               <Link className='username' href='MyProfile' style={{
                 textDecoration: "none",
                 color: "#000",
@@ -214,7 +193,7 @@ function page() {
           <div className='mainContainer'>
             <div className='createPost p5'>
               <div className='composePost flex flexa' onClick={() => { setpop(true) }}>
-                <div><Avatar sx={{backgroundColor: "#1F6CFA"}}>{localStorageValue ? `${JSON.parse(localStorageValue).slice(0, 1).toUpperCase()}` : ""}</Avatar></div>
+                <div><Avatar sx={{ backgroundColor: "#1F6CFA" }}>{localStorageValue ? `${JSON.parse(localStorageValue).slice(0, 1).toUpperCase()}` : ""}</Avatar></div>
                 <div className='composeSearch flexa p20 fnt14 '>Start a post</div>
               </div>
               <div className=' composePostFooter flex flexa'>
@@ -237,15 +216,22 @@ function page() {
           </div>
           <div className='sidebarRight flexc'>
             <div className='sideBarNews'>
-              <h4 className='pl20 pt10 lnews'>Linkedin News</h4>
-              <ul>
-                {news && news.map((item, index) => (
-                  <li key={index}>
-                    <a href={item.url}>{item.title}</a>
-                    <p className='fnt12 txt2'>{item.publishedAt}</p>
-                  </li>
-                ))}
-              </ul>
+              <h4 className='pl20 pt10 lnews txt10'>Linkedin News</h4>
+              <div>
+                {newsArray.map((data, i) => {
+                  return (
+                    <div key={i}>
+                      <div className='sideBarNewsList'>
+                        <p className='flex flexa g10'><FaCircleDot style={{scale: "0.5"}}/> {data.headLine}</p>
+                        <p className='pl20 fnt11 ml5 txt4'>{data.telecastedAt} ago</p>
+                      </div>
+                    </div>
+                  );
+                })}
+                <button onClick={showLess ? handleShowLess : handleShowMore}>
+                  {showLess ? "Show less" : "Show more"} {showLess ? <IoChevronUp /> : <IoChevronDown />}
+                </button>
+              </div>
             </div>
             <div className='sideBarImg'>
               <Link href='TryPremium'>

@@ -267,6 +267,7 @@ body{
 
 .logocolor {
   color: #f52936;
+  
 }
 
 .fnt10 {
@@ -427,6 +428,10 @@ body{
   color: #7a7a7a;
 }
 
-.bullets{
+.bulletsRemove{
   list-style-type: none;
+}
+
+.primary-font{
+  font-family: Arial, Helvetica, sans-serif;
 }

@@ -24,9 +24,10 @@
     margin: 0px 5px 0px 5px;
   }
 .userCoverAside {
-  width: 25%;
-  height: 30%;
-  border: 1px solid rgba(128, 128, 128, 0.408);
+  width: 26.5%;
+  height: 20%;
+  padding: 19px;
+  border: 0.8px solid rgba(128, 128, 128, 0.408);
   border-radius: 6px;
   background-color: #fff;
 }
@@ -64,10 +65,11 @@
 }
 
 .hrprofileAside {
-  margin-top: 30px;
-  margin-bottom: 10px;
-  border: 1px solid rgba(128, 128, 128, 0.359);
+  margin-top: 14px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(208, 206, 206, 0.359);
 }
+
 .userDetailsPop {
   position: absolute;
   height: 100%;
@@ -97,3 +99,13 @@
     width: 40px;
 }
 
+.followButton button{
+  padding: 5px;
+  border: none;
+  border-radius: 20px;
+  background-color: #1F6CFA;
+  width: 150px;
+  color: #fff;
+  cursor: pointer;
+  margin-top: 10px;
+}

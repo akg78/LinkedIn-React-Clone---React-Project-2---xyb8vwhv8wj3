@@ -98,8 +98,8 @@ export default function CreateSpaceButton(getChannel) {
           <Box sx={{ width: "100%" }}>
             <div className="coverGroup">
               <div className="groupDp">
-                <span className="flex coverProfilePic">
-                  <Button
+                <span className="flex ">
+                  {/* <Button
                     sx={{ height: "5px", width: "5px", borderRadius: "10px" }}
                     component="label"
                     role={undefined}
@@ -118,7 +118,7 @@ export default function CreateSpaceButton(getChannel) {
                     }
                   >
                     <VisuallyHiddenInput type="file" />
-                  </Button>
+                  </Button> */}
                 </span>
               </div>
               <div className="postButton">

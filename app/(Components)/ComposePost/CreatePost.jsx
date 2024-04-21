@@ -67,7 +67,7 @@ export default function CreatePost({
       <div className="popUpPost mb20">
         <div className="headerPop p30 flex flexa g10">
           <div>
-          <Avatar sx={{scale: "1.2"}}>{localStorage.getItem("name") ? `${JSON.parse(localStorage.getItem('name')).slice(0,1).toUpperCase()}` : ""}</Avatar>
+          <Avatar  sx={{scale: "1.2", backgroundColor: "#1F6CFA"}}>{localStorage.getItem("name") ? `${JSON.parse(localStorage.getItem('name')).slice(0,1).toUpperCase()}` : ""}</Avatar>
           </div>
           <div>
           {localStorage.getItem("name") ? `${JSON.parse(localStorage.getItem('name')).charAt(0).toUpperCase() + JSON.parse(localStorage.getItem('name')).slice(1) }` : ""}

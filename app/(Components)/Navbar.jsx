@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import "./Navbar.css";
 
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -12,17 +11,22 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { logo, navPages, user, usersProfile } from "../(Constants)/Assets";
+import {
+  logo,
+  navPages,
+  navicon,
+  user,
+  usersProfile,
+} from "../(Constants)/Assets";
 import { styled, alpha } from "@mui/material/styles";
-import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { context } from "../layout";
-import { FormControlLabel, Modal } from "@mui/material";
+import { FormControlLabel, InputBase, Modal } from "@mui/material";
 import Switch from "@mui/material/Switch";
 import { useRouter } from "next/navigation";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -77,11 +81,14 @@ function Navbar() {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [token, setToken] = useState();
   const [localStorageValue, setLocalStorageValue] = useState();
-  const [searchInput, setSearchInput] = useState("");
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [searchingUser, setSearchingUser] = useState("");
+
+  const router = useRouter();
+
+
+  const [searchInput, setSearchInput] = useState([]);
   const [searchUser, setSearchUser] = useState([]);
+  const [searchinputstate, setsearchinputstate] = useState();
 
   const SearchBar = async () => {
     try {
@@ -96,7 +103,6 @@ function Navbar() {
       );
       const result = await response.json();
       setSearchUser(result.data);
-      console.log("searchBar", result);
     } catch (error) {
       // console.log("error", error);
     }
@@ -104,12 +110,14 @@ function Navbar() {
 
   useEffect(() => {
     SearchBar();
+    const value = localStorage.getItem("name");
+    setLocalStorageValue(value);
   }, []);
 
   const fetchSearch = async () => {
     try {
       const response = await fetch(
-        `https://academics.newtonschool.co/api/v1/linkedin/post?search={"author.name":"${searchInput}"}`,
+        `https://academics.newtonschool.co/api/v1/linkedin/post?search={"author.name":"${searchingUser}"}`,
         {
           method: "GET",
           headers: {
@@ -118,52 +126,11 @@ function Navbar() {
         }
       );
       const result = await response.json();
-      console.log("searchApi", result);
-      // setcommmentAuthor(result.data);
+      setSearchInput(result.data);
     } catch (error) {
       // console.log("error", error);
     }
   };
-
-  // const [loginShow, setLoginShow] = useState(false);
-
-  const Search = styled("div")(({ theme }) => ({
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(1),
-      width: "auto",
-    },
-  }));
-
-  const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  }));
-
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: "inherit",
-    width: "100%",
-    "& .MuiInputBase-input": {
-      padding: theme.spacing(1, 1, 1, 0),
-      //   vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create("width"),
-      [theme.breakpoints.up("sm")]: {
-        width: "20ch",
-        "&:focus": {
-          width: "28ch",
-        },
-      },
-    },
-  }));
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -195,57 +162,34 @@ function Navbar() {
 
   useEffect(() => {
     fetchSearch();
-    const value = localStorage.getItem("name");
-    setLocalStorageValue(value);
-  }, [searchInput]);
+  }, [searchingUser]);
 
-  const router = useRouter();
-
-  function navigateToProfile(){
-    router.push(`/${localStorage.getItem("id")}`)
+  function focussearchinput() {
+    setsearchinputstate("active");
   }
+
+  function blursearchinput() {
+    setTimeout(() => {
+      setsearchinputstate("");
+    }, 300);
+  }
+
+  //Navigate to users profile
+
+  function navigateToProfile() {
+    router.push(`/${localStorage.getItem("id")}`);
+  }
+
+  function navigateToUser(id) {
+    router.push(`/${id}`);
+  }
+
 
   return (
     <>
       {show && (
         // <Box sx={{display: "flex", justifyContent:"center", width: "100vw", overflowY: "hidden"}}>
         <Container maxWidth="xl" sx={{ display: "flex", position: "relative" }}>
-          {/* {open &&<div className=""><SearchPop setOpen={setOpen} handleClose={handleClose} handleOpen={handleOpen}/></div> } */}
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box
-              sx={{
-                position: "absolute",
-                top: "11.2%",
-                left: "30.5%",
-                transform: "translate(-50%, -50%)",
-                width: 450,
-                bgcolor: "background.paper",
-                p: 4,
-                borderRadius: "6px",
-                boxShadow: 24,
-                flexDirection: "column",
-              }}
-            >
-              <Typography sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                <SearchIcon />
-                <Link href="UserDetails"></Link>
-                {/* {searchUser.map((item, index) => (
-                  <span key={index} className="flex flexc">
-                    <p>{item.author.name}</p>
-                  </span>
-                ))} */}
-              </Typography>
-
-              {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                    </Typography> */}
-            </Box>
-          </Modal>
           <Toolbar
             disableGutters
             sx={{
@@ -266,23 +210,50 @@ function Navbar() {
               <Link href="/Home">{logo}</Link>
             </Box>
 
-            <Box sx={{ ml: "10px" }}>
-              <Search
-                sx={{ height: "40px", backgroundColor: "#edf3f8" }}
-                onClick={handleOpen}
-              >
-                <SearchIconWrapper sx={{ scale: "0.90", color: "#000000de" }}>
-                  <SearchIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
-                  sx={{ scale: "1", color: "#000000de" }}
-                  placeholder="Search…"
-                  inputProps={{ "aria-label": "search" }}
-                  value={searchInput}
-                  onChange={(e) => setSearchInput(e.target.value)}
-                />
-              </Search>
-            </Box>
+            <div className="searchinput flex flexa">
+              <SearchIcon style={{ scale: "0.9", fill: ("black", "") }} />
+              <input
+                type="text"
+                placeholder="Search..."
+                onFocus={focussearchinput}
+                onBlur={blursearchinput}
+                value={searchingUser}
+                onChange={(e) => {
+                  setSearchingUser(e.target.value), focussearchinput();
+                }}
+              />
+              {searchinputstate && (
+                <div
+                  className="childSearchinput"
+                >
+                  {searchInput && searchInput.map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex flexc "
+                    onClick={() => {
+                      navigateToUser(item.author._id);
+                    }}
+                  >
+                    <div
+                      className="flex flexa g10 wrapsearchnameandimg p5 "
+                    >
+                      <SearchIcon sx={{ scale: "0.9" }} />
+                      <p className="searchuserImg flex cp">
+                        {item.author.profileImage !== null ? (
+                          <img src={item.author.profileImage} />
+                        ) : (
+                          <p className="flex flexja staticImgSearch">
+                            {item.author.name.slice(0, 1).toUpperCase()}
+                          </p>
+                        )}
+                      </p>
+                      <p className="cp">{item.author.name}</p>
+                    </div>
+                  </div>
+                ))}
+                </div>
+              )}
+            </div>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
@@ -375,13 +346,25 @@ function Navbar() {
               ))}
             </Box>
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Me">
+              <Tooltip
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
                 <IconButton
                   onClick={handleOpenUserMenu}
-                  sx={{ p: 0 }}
                   disableRipple
+                  sx={{ marginTop: "18px", height: "10px", width: "10px" }}
                 >
-                  <Avatar sx={{ backgroundColor: "#1F6CFA" }}>
+                  <Avatar
+                    sx={{
+                      backgroundColor: "#1F6CFA",
+                      marginLeft: "25px",
+                      scale: "0.7",
+                    }}
+                  >
                     {localStorage.getItem("name")
                       ? `${JSON.parse(localStorage.getItem("name"))
                           .slice(0, 1)
@@ -389,6 +372,28 @@ function Navbar() {
                       : ""}
                   </Avatar>
                 </IconButton>
+
+                <Typography
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    fontSize: "13px",
+                    marginTop: "10px",
+                    color: "#00000099",
+                    height: "10px",
+                    width: "40px",
+                    fontFamily: "sans-serif",
+                  }}
+                >
+                  Me{" "}
+                  <p className="mt5 ">
+                    {
+                      <ArrowDropDownIcon
+                        sx={{ width: "fit-content", height: "22px" }}
+                      />
+                    }
+                  </p>
+                </Typography>
               </Tooltip>
 
               <Menu
@@ -407,11 +412,6 @@ function Navbar() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {/* {usersProfile.map((showuser) => (
-                <MenuItem key={showuser} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{show.user}</Typography>
-                </MenuItem>
-              ))} */}
                 <MenuItem
                   sx={{ height: "300px", width: "240px" }}
                   disableRipple
@@ -449,9 +449,10 @@ function Navbar() {
                       </p>
                     </div>
 
-                    <p onClick={()=>{
-                      navigateToProfile()
-                    }}
+                    <p
+                      onClick={() => {
+                        navigateToProfile();
+                      }}
                       style={{
                         textDecoration: "none",
                         color: " black",

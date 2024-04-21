@@ -1,11 +1,8 @@
 "use client";
 import React, { useState, useEffect } from 'react'
 import CloseIcon from "@mui/icons-material/Close";
-import ImageIcon from "@mui/icons-material/Image";
 import "./Edit.css";
-import { styled } from "@mui/material/styles";
-import Button from "@mui/material/Button";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { Avatar } from '@mui/material';
 
 export default function Edit({ setPopEdit, modifyTitle, setModifyTitle, modifyContent, setModifyContent, modifyPostID, setModifyPostID, toggle, setToggle }) {
 
@@ -37,26 +34,30 @@ export default function Edit({ setPopEdit, modifyTitle, setModifyTitle, modifyCo
     }
 
 
-    const VisuallyHiddenInput = styled("input")({
-        clip: "rect(0 0 0 0)",
-        clipPath: "inset(50%)",
-        height: 1,
-        overflow: "hidden",
-        position: "absolute",
-        bottom: 0,
-        left: 0,
-        whiteSpace: "nowrap",
-        width: 1,
-    });
-
     return (
         <div>
             <div className="popUpPost editPost mb20">
                 <div className="headerPop p30 flex flexa g10">
                     <div className="imgPop">
-                        <img />
+                        <div className='flex flexa'>
+                            <Avatar
+                                sx={{
+                                    backgroundColor: "#1F6CFA",
+                                    scale: "1.4",
+                                }}
+                            >
+                                {localStorage.getItem("name")
+                                    ? `${JSON.parse(localStorage.getItem("name"))
+                                        .slice(0, 1)
+                                        .toUpperCase()}`
+                                    : ""}
+                            </Avatar>
+                            <p className='ml20' >
+                            {localStorage.getItem("name") ? `${JSON.parse(localStorage.getItem("name"))}` : ""}
+                            </p>
+                        </div>
+
                     </div>
-                    <div className="">Ankit</div>
                     <CloseIcon
                         onClick={() => {
                             setPopEdit(false);
@@ -100,24 +101,9 @@ export default function Edit({ setPopEdit, modifyTitle, setModifyTitle, modifyCo
                 </div>
                 <hr className="hrCreatePost" />
                 <div className="popPost flex flexja flexjsb p20 cp">
-                    <div className='flex flexjsb'>
-                        {/* <Button
-                            onChange={(e) => {
-                                setPostImg(e.target.files[0]);
-                            }}
-                            sx={{ scale: "0.5", mr: "100px", backgroundColor: "lightgray" }}
-                            component="label"
-                            role={undefined}
-                            variant="contained"
-                            tabIndex={-1}
-                            startIcon={<CloudUploadIcon />}
-                        >
-                            Upload file
-                            <VisuallyHiddenInput type="file" />
-                        </Button> */}
-                    </div>
+                    <div className='flex flexjsb'></div>
                     <button
-                        className="flex flexja fnt14 cp"
+                        className="flex flexja fnt14 cp saveButton"
                         disabled={!modifyTitle || !modifyContent}
                         onClick={() => {
                             editPost(modifyPostID);

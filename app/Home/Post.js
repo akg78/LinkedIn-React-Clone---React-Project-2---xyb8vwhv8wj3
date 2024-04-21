@@ -32,7 +32,7 @@ export default function Post({ item, index, deletePost, setpop, popEdit, setPopE
     const [activeLike, setActiveLike] = useState(false);
     const { toggle, setToggle } = useContext(context);
     const [dislike, setDislike] = useState()
-    const liked = [];
+    // const liked = [];
 
     function toggleActive() {
         setActiveLike(!activeLike);
@@ -100,7 +100,7 @@ export default function Post({ item, index, deletePost, setpop, popEdit, setPopE
                 }
             );
             const result = await response.json();
-            console.log("comment get", result.data);
+            // console.log("comment get", result.data);
             setComData(result.data);
 
         } catch (error) {
@@ -126,7 +126,7 @@ export default function Post({ item, index, deletePost, setpop, popEdit, setPopE
                 }
             );
             const res = await response.json();
-            console.log("post Comment", res);
+            // console.log("post Comment", res);
             commentFetch(id)
             setCommpost();
 
@@ -150,14 +150,10 @@ export default function Post({ item, index, deletePost, setpop, popEdit, setPopE
             );
 
             const re = await response.json();
-            console.log("likeeeee", re)
+            // console.log("likeeeee", re)
             setToggle(!toggle);
             setLike(re)
-            liked[index] = true;
-            // for(let j = 0; j<=100; j++){
-            //     console.log(liked[j])   
-            // }
-            console.log(liked)
+           
 
         } catch (error) {
             // console.log(error, "error")
