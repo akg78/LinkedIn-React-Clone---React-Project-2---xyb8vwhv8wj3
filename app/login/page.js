@@ -59,7 +59,7 @@ const Login = () => {
           }
         );
         const data = await response.json();
-        console.log("Signup", data);
+        // console.log("Signup", data);
 
         if (data.status === "success") {
           const token = data.token;
@@ -104,12 +104,12 @@ const Login = () => {
       );
 
       const newData = await res.json();
-      console.log("Login", newData);
+      // console.log("Login", newData);
       if (newData.status === "success") {
         const token = newData.token;
         localStorage.setItem("token", token);
-        localStorage.setItem("id", newData.data._id);
-        localStorage.setItem('name', JSON.stringify(newData.data.name));
+        localStorage.setItem("id", newData.data.user._id);
+        localStorage.setItem('name', JSON.stringify(newData.data.user.name));
         setshow(true);
         router.push('/');
       } else if (name === "" || email === "" || password === "") {
