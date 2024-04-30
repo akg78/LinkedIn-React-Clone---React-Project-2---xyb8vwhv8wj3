@@ -62,10 +62,10 @@ function page() {
         }
       )).json();
       setPost(response.data)
-      // console.log("posttttttttt", response.data);
+      console.log("posttttttttt", response.data);
       // setIsLoading(false);
     } catch (error) {
-      // console.log(error, "error")
+      console.log(error, "error")
       // setIsLoading(false);
     }
   }, [toggle]
