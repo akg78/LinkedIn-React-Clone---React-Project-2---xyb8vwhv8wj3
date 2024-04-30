@@ -119,7 +119,7 @@ export default function page(props) {
                 </p>
               </div>
               <div className="ml10 sidebarLink">
-                <Link
+                {/* <Link
                   href="Groups"
                   style={{
                     textDecoration: "none",
@@ -131,7 +131,7 @@ export default function page(props) {
                   }}
                 >
                   Groups
-                </Link>
+                </Link> */}
               </div>
             </div>
           )}
