@@ -413,7 +413,7 @@ function Navbar() {
                 onClose={handleCloseUserMenu}
               >
                 <MenuItem
-                  sx={{ height: "300px", width: "240px" }}
+                  sx={{ height: "270px", width: "240px" }}
                   disableRipple
                 >
                   <Box
@@ -476,7 +476,7 @@ function Navbar() {
 
                     {/* dark toggle */}
 
-                    <FormControlLabel
+                    {/* <FormControlLabel
                       sx={{ scale: "0.9" }}
                       onClick={() => {
                         toggleTheme();
@@ -489,7 +489,7 @@ function Navbar() {
                         />
                       }
                       label="Dark"
-                    />
+                    /> */}
 
                     {/* dark toggle */}
 

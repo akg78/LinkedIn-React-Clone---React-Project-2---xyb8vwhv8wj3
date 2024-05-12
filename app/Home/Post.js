@@ -250,7 +250,8 @@ export default function Post({ item, index, deletePost, setpop, popEdit, setPopE
                 </div>
                 <hr className='hrPostt' />
                 <div className='dis-btn flex p5'>
-                    {<div className='flex g5 p20 ' onClick={() => { likePost(item._id, index), toggleActive() }}><p><ThumbUpIcon className={activeLike ? 'active' : 'inactive'} /></p>Like</div>}
+                    {<div className='flex g5 p20 ' onClick={() => { likePost(item._id, index) }}><p><ThumbUpIcon  /></p>Like</div>}
+                    {<div className='flex g5 p20 ' onClick={() => { dislikePost(item._id, index), toggleActive() }}><p><ThumbUpIcon  /></p>Dislike</div>}
                     {/* {like.status === "success" && <div className='flex g5 p20 ' onClick={()=>{deslikePost(item._id)}}><p><ThumbUpIcon className={activeLike ? 'inactive' : 'active'} /></p>dislike</div>} */}
                     <div className='flex g5 p20' onClick={() => { setCommentPop(!commentPop); commentFetch(item._id) }}><p><FaRegCommentDots /></p>Comments</div>
                     {/* <div className='flex g5 p20'><p><FaShare /></p>Share</div> */}

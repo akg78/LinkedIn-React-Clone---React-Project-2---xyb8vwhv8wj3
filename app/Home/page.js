@@ -11,14 +11,14 @@ import CreatePost from '../(Components)/ComposePost/CreatePost';
 import { context } from '../layout';
 import Post from './Post';
 import Edit from './Edit';
-import { ToastContainer, toast } from 'react-toastify';
+// import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Link from 'next/link';
 // import Loader from '../(Components)/Loader';
 import { getNewsList, sideBarImg, userCoverPicHome } from '../(Constants)/Assets';
 // import index from 'toastify';
 import { Article } from '@mui/icons-material';
-import { Avatar } from '@mui/material';
+import { Avatar, Typography } from '@mui/material';
 import { FaCircleDot } from "react-icons/fa6";
 import { IoChevronDown } from "react-icons/io5";
 import { IoChevronUp } from "react-icons/io5";
@@ -176,7 +176,7 @@ function page() {
                 {localStorageValue ? `${JSON.parse(localStorageValue).charAt(0).toUpperCase() + JSON.parse(localStorageValue).slice(1)}` : ""}
               </Link>
 
-              <p>HTML | CSS | JavaScript | React | Java | Web Developer with a Passion for Creating Beautiful Websites.</p>
+              <Typography sx={{scale: "1.1"}}>Web Developer with a Passion for Creating Beautiful Websites.</Typography>
             </div>
             <div className='ml10 sidebarLink'>
               <Link href='Groups' style={{
@@ -241,7 +241,7 @@ function page() {
           </div>
         </Box>
       </div>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
 
       {/* <Loader/> */}
     </>

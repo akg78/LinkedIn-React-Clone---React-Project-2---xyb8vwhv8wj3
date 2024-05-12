@@ -14,14 +14,16 @@ import { fullLogo, logo } from '../(Constants)/Assets';
 import { signInApi, signUpApi } from '../(Constants)/Api';
 import { useRouter } from 'next/navigation';
 import { context } from "../layout"
-
 // TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
 const Login = () => {
+
   const router = useRouter();
   const { show, setshow, setShowNavbar, showNavbar } = useContext(context);
+
+
 
   useEffect(() => {
     setShowNavbar(false)
@@ -33,6 +35,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [snackbarMessage, setSnackbarMessage] = useState('');
 
 
   // -------------------------fetch API signup --------------------------------
@@ -71,13 +74,13 @@ const Login = () => {
         } else if (data.message === 'User already exists') {
           alert('user already exists')
         }
-         else if (data.message === "Invalid input data. A user must have a name. A user must have an email") {
+        else if (data.message === "Invalid input data. A user must have a name. A user must have an email") {
           alert("please fill all the details!")
         }
-      }else{
+      } else {
         alert("please fill all the details!")
       }
-    } 
+    }
     catch (error) {
       alert(error);
     }
@@ -104,19 +107,23 @@ const Login = () => {
       );
 
       const newData = await res.json();
-      // console.log("Login", newData);
+      console.log("Login", newData);
+
       if (newData.status === "success") {
         const token = newData.token;
         localStorage.setItem("token", token);
         localStorage.setItem("id", newData.data.user._id);
         localStorage.setItem('name', JSON.stringify(newData.data.user.name));
-        setshow(true);
+        // alert('Login successfully');
         router.push('/');
+        setshow(true);
       } else if (name === "" || email === "" || password === "") {
-        alert("Login or Password incorrect!")
+        alert('please fill all the details!');
+
       }
     } catch (error) {
-      alert(error);
+      alert('An error occurred while creating user profile');
+
     }
   };
 

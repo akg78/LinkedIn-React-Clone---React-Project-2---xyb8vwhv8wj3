@@ -12,6 +12,7 @@ import DeleteForever from '@mui/icons-material/DeleteForever';
 import MenuButton from '@mui/joy/MenuButton';
 import Dropdown from '@mui/joy/Dropdown';
 import { useRouter } from "next/navigation";
+import { Box, Typography } from '@mui/material';
 
 
 
@@ -75,9 +76,11 @@ export default function Comments({ item, itemm, index, comData, setComData, comm
 
     const router = useRouter()
 
-    function navigateProfile(id){
+    function navigateProfile(id) {
         router.push(`/${id}`)
     }
+
+    const maxTextLength = 80;
 
     return (
         <>
@@ -85,15 +88,24 @@ export default function Comments({ item, itemm, index, comData, setComData, comm
                 <div className='wrapOtherComments flex  g10 mt10'>
                     <span className='wrapOthercommentsImg'>{itemm.author_details.profileImage !== null ?
                         <img src={itemm.author_details.profileImage} loading='lazy' /> :
-                        <p className='commentProfile flex flexja'>{`${itemm.author_details.name.slice(0,1).toUpperCase()}`}</p>
+                        <p className='commentProfile flex flexja'>{`${itemm.author_details.name.slice(0, 1).toUpperCase()}`}</p>
                     }
 
                     </span>
                     <div className='otherCommentsSection flex flexjsb p5'>
 
                         <div className='flexc '>
-                            <h5 className='homeUserName' onClick={()=>{navigateProfile(item.author._id)}}>{itemm.author_details.name}</h5>
-                            <p>{itemm.content}</p>
+                            <h5 className='homeUserName' onClick={() => { navigateProfile(item.author._id) }}>{itemm.author_details.name}</h5>
+                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                <div style={{ marginRight: '10px' }}>
+                                    <Typography variant="body1">{itemm.comments}</Typography>
+                                </div>
+                                <div style={{ flex: 1 }}>
+                                    <Typography variant="body1">
+                                        {itemm.content.length > maxTextLength ? `${itemm.content.substring(0, maxTextLength)}` : itemm.content}
+                                    </Typography>
+                                </div>
+                            </Box>
                         </div>
 
                         <Dropdown>
@@ -112,12 +124,14 @@ export default function Comments({ item, itemm, index, comData, setComData, comm
                                     Edit post
                                 </MenuItem>
                                 <ListDivider /> */}
+
                                 <MenuItem variant="soft" color="danger" onClick={() => { deleteComment(itemm._id) }}>
                                     <ListItemDecorator sx={{ color: 'inherit' }}>
                                         <DeleteForever />
                                     </ListItemDecorator>{' '}
                                     Delete
                                 </MenuItem>
+
                             </Menu>
                         </Dropdown>
                     </div>
