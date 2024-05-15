@@ -107,16 +107,19 @@ export default function Comments({ item, itemm, index, comData, setComData, comm
                                 </div>
                             </Box>
                         </div>
-
                         <Dropdown>
-                            <MenuButton
+                            {/* <Dropdown> */}
+                            {item.author._id === localStorage.getItem("id") &&
+                            <MenuButton 
                                 slots={{ root: IconButton }}
                                 slotProps={{ root: { color: 'neutral' } }}
                             >
-                                {item.author._id === localStorage.getItem("id") && <MoreVert />}
-                                {/* <MoreVert /> */}
-                            </MenuButton>
-                            <Menu placement="bottom-end">
+                                {/* {item.author._id === localStorage.getItem("id") && <MoreVert />} */}
+                                <MoreVert />
+                            </MenuButton>}
+                           
+                            <Menu placement="bottom-end" >
+
                                 {/* <MenuItem >
                                     <ListItemDecorator>
                                         <Edit />
@@ -124,14 +127,13 @@ export default function Comments({ item, itemm, index, comData, setComData, comm
                                     Edit post
                                 </MenuItem>
                                 <ListDivider /> */}
-
+                                 
                                 <MenuItem variant="soft" color="danger" onClick={() => { deleteComment(itemm._id) }}>
                                     <ListItemDecorator sx={{ color: 'inherit' }}>
                                         <DeleteForever />
                                     </ListItemDecorator>{' '}
                                     Delete
                                 </MenuItem>
-
                             </Menu>
                         </Dropdown>
                     </div>
