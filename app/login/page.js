@@ -117,10 +117,14 @@ const Login = () => {
         // alert('Login successfully');
         router.push('/');
         setshow(true);
-      } else if (name === "" || email === "" || password === "") {
-        alert('please fill all the details!');
-
       }
+      else if (newData.message === "Incorrect EmailId or Password") {
+        alert("Incorrect Email or Password")
+      }
+      else if (name === "" || email === "" || password === "") {
+        alert('please fill all the details!');
+      }
+
     } catch (error) {
       alert('An error occurred while creating user profile');
 

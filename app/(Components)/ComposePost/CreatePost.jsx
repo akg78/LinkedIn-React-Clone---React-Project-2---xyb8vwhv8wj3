@@ -40,7 +40,11 @@ export default function CreatePost({
       );
       const result = await response.json();
       // console.log(result);
-      setToggle(!toggle);
+      if(result){
+        setPostTitle("");
+        setPostContent("");
+        setToggle(!toggle);
+      }
     } catch (error) {
       // console.log(error);
     }

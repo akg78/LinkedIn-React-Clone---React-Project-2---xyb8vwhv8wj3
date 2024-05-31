@@ -19,6 +19,8 @@ import { Box, Typography } from '@mui/material';
 
 
 export default function Comments({ item, itemm, index, comData, setComData, commentPop, setCommentPop, commentFetch, itemId }) {
+    // console.log(itemm)
+    // console.log(localStorage.getItem("id"))
 
     const [commmentAuthor, setcommmentAuthor] = useState("");
     // const [yourcom, setYourcom] = useState("");
@@ -109,7 +111,7 @@ export default function Comments({ item, itemm, index, comData, setComData, comm
                         </div>
                         <Dropdown>
                             {/* <Dropdown> */}
-                            {item.author._id === localStorage.getItem("id") &&
+                            {itemm.author === localStorage.getItem("id") &&
                             <MenuButton 
                                 slots={{ root: IconButton }}
                                 slotProps={{ root: { color: 'neutral' } }}
