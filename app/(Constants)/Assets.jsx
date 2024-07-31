@@ -624,7 +624,7 @@ export const UnderContruction = (
       </linearGradient>
     </defs>
     <image
-      href="https://minimals.cc/assets/illustrations/characters/character_5.png"
+      href="https://pub-c5e31b5cdafb419fb247a8ac2e78df7a.r2.dev/public/assets/illustrations/characters/character-5.webp"
       style={{height: "300px", width: "300px"}}
       x="245"
       y="30"

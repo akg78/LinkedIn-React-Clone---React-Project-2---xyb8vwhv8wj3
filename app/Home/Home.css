@@ -301,9 +301,17 @@
 
 }
 
+.sidebarLink{
+  color: "#0A66C2";
+  font-size: "4px";
+  font-Family: "Arial, Helvetica, sans-serif",
+}
+
 .sidebarLink:hover{
   text-decoration: underline;
   color: #0a66c2;
+  cursor: pointer;
+  
 }
 .imgHeader {
   width: 55px;

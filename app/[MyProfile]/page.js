@@ -154,7 +154,12 @@ function page(props) {
 
                             <div className='pl20'>
                                 <h2>{userData.name}</h2>
-                                {userData.address && userData.address.length > 0 && <p className='txt4 fnt14 mt5'>{userData.address[0].city}, {userData.address[0].state}, {userData.address[0].country}</p>}
+                                <p className='txt4 fnt14 mt5'>
+                                    {userData.address && userData.address.length > 0
+                                        ? `${userData.address[0].city}, ${userData.address[0].state}, ${userData.address[0].country}`
+                                        : "Web Developer with a Passion for Creating Beautiful Websites."
+                                    }
+                                </p>
 
                                 <span className='followButton'>{isFollowed ? (<button onClick={() => { handleFollow() }}>Unfollow</button>) : (<button onClick={() => { handleFollow() }}>Follow</button>)}</span>
                             </div>
@@ -164,10 +169,9 @@ function page(props) {
                         <Box sx={{ mt: "25px", padding: "25px", display: "flex", flexDirection: "column", boxShadow: "0px 0px 0px 0.2px grey", backgroundColor: "#fff", borderRadius: "7.5px" }}>
                             <h3 className='txt10'>Experience</h3>
                             <div className='flex flexc p10 pl30'>
-
-                                <h6 className='fnt16 txt10'>{userData.workExperience ? userData.workExperience[0].designation : ""}</h6>
+                                <h6 className='fnt16 txt10'>{userData.workExperience ? userData.workExperience[0].designation : " "}</h6>
                                 {/* <h6 className='fnt16 txt10'>{userData.workExperience.length > 0 ? userData.workExperience[0].designation : ""}</h6> */}
-                                <span className='fnt15 txt5'>{userData.workExperience && userData.workExperience[0].companyName}</span>
+                                <span className='fnt15 txt5'>{userData.workExperience && userData.workExperience[0].companyName || "Not added yet"}</span>
                                 {/* <span className='flex fnt14 txt9'><p>{userData.workExperience && startMonth} {userData.workExperience && startYear} , {userData.workExperience && endMonth} {userData.workExperience && endYear}</p></span> */}
                                 <span className='fnt14 txt9'>{userData.workExperience && userData.workExperience[0].location}</span>
                                 <span className='mt5 fnt14'>{userData.workExperience && userData.workExperience[0].description}</span>
@@ -178,12 +182,12 @@ function page(props) {
                             <h3>Education</h3>
                             <div className='flex flexc p10 pl30'>
                                 {/* <h6 className='fnt16 txt10'>{userData.education ? userData.education[0].schoolName : ""}</h6> */}
-                                <h6 className='fnt16 txt10'>{userData.education && userData.education.length > 0 ? userData.education[0].schoolName : ""}</h6>
+                                <h6 className='fnt16 txt10'>{userData.education && userData.education.length > 0 ? userData.education[0].schoolName : " "}</h6>
 
                                 {/* <span className='fnt15 txt5'>{userData.education ? userData.education[0].degree : ""}</span> */}
-                                <span className='fnt15 txt5'>{userData.education ? userData.education[0]?.degree : ""}</span>
+                                <span className='fnt15 txt5'>{userData.education && userData.education.length > 0 ? userData.education[0].degree : "Not added yet"}</span>
                                 {/* <span className='flex fnt14 txt9'><p>{userData.education && startMonthEdu} {userData.education && startYearEdu} , {userData.education && startMonthEduE} {userData.education && startYearEduE}</p></span> */}
-                                <span className='mt5 fnt14'>{userData.education ? userData.education[0]?.description : ""}</span>
+                                <span className='mt5 fnt14'>{userData.education ? userData.education[0]?.description : " "}</span>
                             </div>
                         </Box>
 
@@ -191,9 +195,13 @@ function page(props) {
                             <h3>Skills</h3>
                             <div className='flex flexc p10 pl30'>
                                 <ul>
-                                    {userData.skills && userData.skills.map((skills, index) => (
-                                        <li className='bulletsRemove txt10' key={index}>{skills}</li>
-                                    ))}
+                                    {userData.skills && userData.skills.length > 0 ? (
+                                        userData.skills.map((skill, index) => (
+                                            <li className='bulletsRemove txt10' key={index}>{skill}</li>
+                                        ))
+                                    ) : (
+                                        <p className='bulletsRemove fnt15 txt5'>Not added yet</p>
+                                    )}
                                 </ul>
                             </div>
                         </Box>

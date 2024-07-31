@@ -119,6 +119,7 @@ const Login = () => {
         setshow(true);
       }
       else if (newData.message === "Incorrect EmailId or Password") {
+        console.log(newData.message)
         alert("Incorrect Email or Password")
       }
       else if (name === "" || email === "" || password === "") {

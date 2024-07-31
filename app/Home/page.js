@@ -178,7 +178,7 @@ function page() {
 
               <Typography sx={{scale: "1.1"}}>Web Developer with a Passion for Creating Beautiful Websites.</Typography>
             </div>
-            <div className='ml10 sidebarLink'>
+            <div className='ml10 flex flexc'>
               <Link href='Groups' style={{
                 textDecoration: "none",
                 color: "#0A66C2",
@@ -187,6 +187,15 @@ function page() {
                 fontFamily: "Arial, Helvetica, sans-serif",
                 fontSmooth: "always"
               }}>Groups</Link>
+
+              <div className='mt10 '>
+                <p className='sidebarLink'>Newton School</p>
+                <p className='sidebarLink'>Newton code Zone</p>
+                <p className='sidebarLink'>Buddies</p>
+                <p className='sidebarLink'>Newton Brother</p>
+
+              </div>
+              
             </div>
           </div>
 
